@@ -7,6 +7,7 @@ let timelineEnabled = false;
 
 document.addEventListener('DOMContentLoaded', function() {
     initializeProjectsPage();
+    setupHamburgerMenu();
 });
 
 function initializeProjectsPage() {
@@ -41,7 +42,7 @@ function setupToggle() {
 }
 
 function toggleTimeline() {
-    timelineEnabled = !timelineEnabled;
+    timelineEnabled = document.getElementById('timelineToggle').checked;
     const timelineBar = document.getElementById('timelineBar');
     const sectionHeaders = document.getElementById('sectionHeaders');
     
@@ -97,6 +98,18 @@ function updateTimelineFilter(value) {
 // ============================================
 function renderProjects(filter) {
     const grid = document.getElementById('projectsGrid');
+    const sectionHeaders = document.getElementById('sectionHeaders');
+
+    // Standard mode: show projects grouped under Past/Current/Future areas.
+    if (filter === 'all') {
+        renderGroupedProjects();
+        grid.classList.add('hidden');
+        sectionHeaders.classList.remove('hidden');
+        return;
+    }
+
+    // Timeline mode: show a single filtered grid.
+    grid.classList.remove('hidden');
     grid.innerHTML = '';
     
     // Filter projects
@@ -117,6 +130,47 @@ function renderProjects(filter) {
     }
 }
 
+function renderGroupedProjects() {
+    const sectionHeaders = document.getElementById('sectionHeaders');
+    const groups = [
+        { type: 'past', title: 'Past Projects' },
+        { type: 'current', title: 'Current Projects' },
+        { type: 'future', title: 'Future Projects' }
+    ];
+
+    sectionHeaders.innerHTML = '';
+
+    groups.forEach(group => {
+        const section = document.createElement('div');
+        section.className = 'section-header';
+
+        const heading = document.createElement('h3');
+        heading.textContent = group.title;
+        section.appendChild(heading);
+
+        const groupGrid = document.createElement('div');
+        groupGrid.className = 'projects-grid section-projects-grid';
+
+        const groupProjects = projects.filter(project => project.type === group.type);
+        if (groupProjects.length === 0) {
+            const empty = document.createElement('p');
+            empty.textContent = `No ${group.type} projects yet.`;
+            empty.style.gridColumn = '1/-1';
+            empty.style.textAlign = 'center';
+            empty.style.color = '#999';
+            groupGrid.appendChild(empty);
+        } else {
+            groupProjects.forEach((project, index) => {
+                const card = createProjectCard(project, index);
+                groupGrid.appendChild(card);
+            });
+        }
+
+        section.appendChild(groupGrid);
+        sectionHeaders.appendChild(section);
+    });
+}
+
 function createProjectCard(project, index) {
     const card = document.createElement('div');
     card.className = 'project-card';
@@ -128,14 +182,11 @@ function createProjectCard(project, index) {
     card.innerHTML = `
         <div class="project-card-image-wrapper">
             <img src="${project.image}" alt="${project.title}" class="project-card-image">
-            <a href="${project.link}" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="Visit Project">
-                <span>🔗</span>
-            </a>
         </div>
         <div class="project-card-content">
             <div class="project-card-status ${project.type}">${typeLabel}</div>
             <h3 class="project-card-title">${project.title}</h3>
-            <p class="project-card-description">${project.summary}</p>
+            <p class="project-card-description">${project.cardSummary}</p>
         </div>
     `;
     
@@ -168,11 +219,14 @@ function setupModal() {
 
 function openModal(project) {
     const modal = document.getElementById('projectModal');
+    const modalProjectLink = document.getElementById('modalProjectLink');
     
     // Populate modal with project data
     document.getElementById('modalImage').src = project.image;
     document.getElementById('modalImage').alt = project.title;
     document.getElementById('modalTitle').textContent = project.title;
+    modalProjectLink.href = project.link;
+    modalProjectLink.setAttribute('aria-label', `Visit ${project.title}`);
     document.getElementById('modalSummary').textContent = project.summary;
     document.getElementById('modalChallenges').textContent = project.challenges;
     
@@ -195,6 +249,37 @@ function closeModal() {
     const modal = document.getElementById('projectModal');
     modal.classList.add('hidden');
     document.body.style.overflow = 'auto'; // Re-enable scrolling
+}
+
+// ============================================
+// HAMBURGER MENU SETUP
+// ============================================
+function setupHamburgerMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    const navLinks = navMenu.querySelectorAll('a');
+
+    // Toggle hamburger menu
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
+
+    // Close menu when a link is clicked
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.navbar')) {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        }
+    });
 }
 
 // ============================================

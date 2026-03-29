@@ -14,19 +14,22 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <h1 class="nav-logo">Nikola Jankovic</h1>
-            <ul class="nav-menu">
+            <h1 class="nav-logo"><span class="nav-logo-full">Nikola Jankovic</span><span class="nav-logo-short">NJ</span></h1>
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <label class="dark-mode-toggle">
+                <input type="checkbox" id="darkModeToggle" class="dark-mode-input">
+                <span class="dark-mode-emoji" id="darkModeEmoji">☀️</span>
+            </label>
+            <ul class="nav-menu" id="navMenu">
                 <li><a href="#intro">Home</a></li>
                 <li><a href="#education">Education</a></li>
                 <li><a href="#awards">Awards</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#links">Links</a></li>
-                <li>
-                    <label class="dark-mode-toggle">
-                        <input type="checkbox" id="darkModeToggle" class="dark-mode-input">
-                        <span class="dark-mode-emoji" id="darkModeEmoji">☀️</span>
-                    </label>
-                </li>
             </ul>
         </div>
     </nav>
@@ -56,9 +59,9 @@
             <p>I've worked on various projects spanning different technologies and domains. Below is a selection of my recent work in past, current, and future projects. Click on any project to learn more about the challenges, tools, and implementations involved.</p>
         </div>
         <div class="projects-links">
-            <a href="projects.html?filter=past" class="project-link-card">Past Projects</a>
-            <a href="projects.html?filter=current" class="project-link-card">Current Projects</a>
-            <a href="projects.html?filter=future" class="project-link-card">Future Projects</a>
+            <a href="projects.html?filter=current" class="project-link-card">Project Page</a>
+            <!-- <a href="projects.html?filter=current" class="project-link-card">Current Projects</a>
+            <a href="projects.html?filter=future" class="project-link-card">Future Projects</a> -->
         </div>
     </section>
 

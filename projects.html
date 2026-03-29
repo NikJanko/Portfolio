@@ -14,19 +14,22 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <h1 class="nav-logo"><a href="index.html">My Portfolio</a></h1>
-            <ul class="nav-menu">
+            <h1 class="nav-logo"><a href="index.html"><span class="nav-logo-full">My Portfolio</span><span class="nav-logo-short">NJ</span></a></h1>
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <label class="dark-mode-toggle">
+                <input type="checkbox" id="darkModeToggle" class="dark-mode-input">
+                <span class="dark-mode-emoji" id="darkModeEmoji">☀️</span>
+            </label>
+            <ul class="nav-menu" id="navMenu">
                 <li><a href="index.html#intro">Home</a></li>
                 <li><a href="index.html#education">Education</a></li>
                 <li><a href="index.html#awards">Awards</a></li>
                 <li><a href="projects.html">Projects</a></li>
                 <li><a href="index.html#links">Links</a></li>
-                <li>
-                    <label class="dark-mode-toggle">
-                        <input type="checkbox" id="darkModeToggle" class="dark-mode-input">
-                        <span class="dark-mode-emoji" id="darkModeEmoji">☀️</span>
-                    </label>
-                </li>
             </ul>
         </div>
     </nav>
@@ -89,6 +92,7 @@
             </div>
             <div class="modal-body">
                 <h2 id="modalTitle"></h2>
+                <a id="modalProjectLink" class="modal-project-link" href="#" target="_blank" rel="noopener noreferrer" title="Visit Project">Visit Project</a>
                 <div class="modal-section">
                     <h3>Summary</h3>
                     <p id="modalSummary"></p>
