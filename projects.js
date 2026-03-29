@@ -139,10 +139,10 @@ function renderProjects(filter) {
 function renderGroupedProjects() {
     const sectionHeaders = document.getElementById('sectionHeaders');
     const groups = [
-        { type: 'dead', title: 'Dead Projects' },
-        { type: 'past', title: 'Past Projects' },
         { type: 'present', title: 'Present Projects' },
-        { type: 'future', title: 'Future Projects' }
+        { type: 'past', title: 'Past Projects' },
+        { type: 'future', title: 'Future Projects' },
+        { type: 'dead', title: 'Dead Projects' }
     ];
 
     sectionHeaders.innerHTML = '';
