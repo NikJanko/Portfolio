@@ -1,7 +1,82 @@
 // ============================================
-// PROJECT DATA - MODULAR & EASILY EDITABLE
+// PORTFOLIO DATA - MODULAR & EASILY EDITABLE
 // ============================================
 
+// PERSONAL INTRO DATA
+const intro = {
+    name: 'Nikola Jankovic',
+    title: 'Full-Stack Developer & Creator',
+    profileImage: 'https://via.placeholder.com/300x300?text=Your+Face',
+    description: 'Hello! I\'m a passionate developer and creator. This is a brief introduction about myself, my interests, and what I\'m currently working on. I specialize in web development, software engineering, and bringing ideas to life through code.'
+};
+
+// EDUCATION DATA
+const education = [
+    {
+        id: 1,
+        title: 'Bachelor of Science (BSc)',
+        subject: 'Computer Science',
+        institution: 'University Name',
+        duration: '2020 - 2023',
+        image: 'https://via.placeholder.com/150x150?text=University',
+        coursework: ['Data Structures', 'Algorithms', 'Web Development', 'Databases']
+    },
+    {
+        id: 2,
+        title: 'Master of Science (MSc)',
+        subject: 'Software Engineering',
+        institution: 'University Name',
+        duration: '2023 - Present',
+        image: 'https://via.placeholder.com/150x150?text=University',
+        focus: ['Full-stack development', 'Cloud computing', 'Advanced algorithms']
+    }
+];
+
+// AWARDS DATA
+const awards = [
+    {
+        id: 1,
+        title: 'Best Developer Award',
+        issuer: 'Tech Conference 2023',
+        image: 'https://via.placeholder.com/60x60?text=Award'
+    },
+    {
+        id: 2,
+        title: 'Dean\'s List Honor',
+        issuer: 'University Name 2022',
+        image: 'https://via.placeholder.com/60x60?text=Award'
+    },
+    {
+        id: 3,
+        title: 'Scholarship Excellence',
+        issuer: 'Education Board 2020',
+        image: 'https://via.placeholder.com/60x60?text=Award'
+    }
+];
+
+// SOCIAL MEDIA & CONTACT LINKS
+const socialLinks = [
+    {
+        id: 1,
+        platform: 'LinkedIn',
+        url: 'https://linkedin.com',
+        image: 'https://via.placeholder.com/80x80?text=LinkedIn'
+    },
+    {
+        id: 2,
+        platform: 'GitHub',
+        url: 'https://github.com',
+        image: 'https://via.placeholder.com/80x80?text=GitHub'
+    },
+    {
+        id: 3,
+        platform: 'WakaTime',
+        url: 'https://wakatime.com',
+        image: 'https://via.placeholder.com/80x80?text=WakaTime'
+    }
+];
+
+// PROJECT DATA
 const projects = [
     // PAST PROJECTS
     {
