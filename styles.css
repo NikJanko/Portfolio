@@ -65,6 +65,8 @@ body {
     list-style: none;
     gap: 2rem;
     margin: 0;
+    margin-left: auto;
+    order: 2;
 }
 
 .nav-menu a {
@@ -85,6 +87,7 @@ body {
     border: none;
     cursor: pointer;
     padding: 0.5rem;
+    order: 2;
 }
 
 .hamburger span {
@@ -113,6 +116,9 @@ body {
     display: flex;
     align-items: center;
     cursor: pointer;
+    order: 3;
+    flex-shrink: 0;
+    margin-left: 0.75rem;
 }
 
 .dark-mode-input {
@@ -371,11 +377,26 @@ body {
     min-height: auto;
 }
 
+.projects-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.projects-header-row .section-title {
+    margin-bottom: 0;
+    order: 1;
+}
+
 /* Toggle Switch */
 .toggle-container {
     display: flex;
-    justify-content: center;
-    margin-bottom: 2rem;
+    justify-content: flex-start;
+    margin-bottom: 0;
+    margin-left: auto;
+    order: 2;
 }
 
 .toggle-switch {
@@ -420,15 +441,15 @@ body {
 
 .timeline-track {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin-bottom: 2rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.8rem;
+    margin-bottom: 0;
 }
 
 .timeline-section {
     text-align: center;
-    padding: 1.5rem;
-    border-radius: 10px;
+    padding: 0.75rem;
+    border-radius: 8px;
     background: #f0f0f0;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -439,55 +460,36 @@ body {
 }
 
 .timeline-section.active {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    color: #ffffff;
+    box-shadow: inset 0 0 0 1px rgba(102, 126, 234, 0.28);
+}
+
+.timeline-section.active.dead {
+    background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+}
+
+.timeline-section.active.past {
+    background: linear-gradient(135deg, #c47f5a 0%, #8a4f36 100%);
+}
+
+.timeline-section.active.present {
+    background: linear-gradient(135deg, #d98f1f 0%, #af6f0f 100%);
+}
+
+.timeline-section.active.future {
+    background: linear-gradient(135deg, #74b9ff 0%, #3d6cb9 100%);
 }
 
 .timeline-icon {
-    font-size: 2.5rem;
+    font-size: 1.4rem;
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.2rem;
 }
 
 .timeline-label {
     display: block;
     font-weight: bold;
-    font-size: 1.1rem;
-}
-
-.timeline-slider {
-    width: 100%;
-}
-
-.slider {
-    width: 100%;
-    height: 8px;
-    border-radius: 5px;
-    background: #ddd;
-    outline: none;
-    -webkit-appearance: none;
-    appearance: none;
-}
-
-.slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    cursor: pointer;
-    box-shadow: 0 2px 10px rgba(102, 126, 234, 0.5);
-}
-
-.slider::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    cursor: pointer;
-    border: none;
-    box-shadow: 0 2px 10px rgba(102, 126, 234, 0.5);
+    font-size: 0.9rem;
 }
 
 /* Section Headers */
@@ -497,10 +499,6 @@ body {
 
 .section-headers.hidden {
     display: none;
-}
-
-.section-header {
-    margin-bottom: 2rem;
 }
 
 .section-header h3 {
@@ -606,6 +604,12 @@ body {
     color: #6d2c2c;
 }
 
+.project-card-status.dead {
+    background: #c6c6c6;
+    color: #3f3f3f;
+}
+
+.project-card-status.present,
 .project-card-status.current {
     background: #a5d4a5;
     color: #2c6d2c;
@@ -777,7 +781,7 @@ body {
     }
 
     .timeline-track {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
     .projects-grid {
@@ -1005,12 +1009,24 @@ body {
 }
 
 :root.dark-mode .timeline-section.active {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    color: #edf2ff;
+    box-shadow: inset 0 0 0 1px rgba(173, 193, 255, 0.25);
 }
 
-:root.dark-mode .slider {
-    background: #444;
+:root.dark-mode .timeline-section.active.dead {
+    background: linear-gradient(135deg, #6b7280 0%, #3f4652 100%);
+}
+
+:root.dark-mode .timeline-section.active.past {
+    background: linear-gradient(135deg, #a45a3a 0%, #6b3f2d 100%);
+}
+
+:root.dark-mode .timeline-section.active.present {
+    background: linear-gradient(135deg, #f0b429 0%, #b97812 100%);
+}
+
+:root.dark-mode .timeline-section.active.future {
+    background: linear-gradient(135deg, #4d86d9 0%, #2f4f86 100%);
 }
 
 :root.dark-mode .section-header h3 {
@@ -1091,6 +1107,12 @@ body {
     color: #ffb3b3;
 }
 
+:root.dark-mode .project-card-status.dead {
+    background: #4c4c4c;
+    color: #d7d7d7;
+}
+
+:root.dark-mode .project-card-status.present,
 :root.dark-mode .project-card-status.current {
     background: #3e5c3e;
     color: #b3ffb3;
@@ -1325,6 +1347,7 @@ body {
     .nav-logo {
         font-size: 0.95rem;
         margin: 0;
+        grid-column: 1;
         justify-self: start;
         white-space: nowrap;
     }
@@ -1340,6 +1363,7 @@ body {
     .hamburger {
         display: flex;
         flex-direction: column;
+        grid-column: 2;
         justify-self: center;
         padding: 0.2rem;
         margin: 0;
@@ -1374,6 +1398,7 @@ body {
         display: flex;
         align-items: center;
         cursor: pointer;
+        grid-column: 3;
         margin: 0;
         padding: 0;
         justify-self: end;
@@ -1577,27 +1602,54 @@ body {
     /* Timeline Bar */
     .timeline-bar {
         padding: 1.5rem;
-        margin-bottom: 2rem;
+        margin-bottom: 0.75rem;
     }
 
     .timeline-track {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 1rem;
         margin-bottom: 1rem;
     }
 
     .timeline-section {
-        padding: 1rem;
+        padding: 0.7rem 0.3rem;
         border-radius: 8px;
+        min-width: 0;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 3rem;
     }
 
     .timeline-icon {
-        font-size: 2rem;
-        margin-bottom: 0.3rem;
+        font-size: 2.2rem;
+        line-height: 1;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 1.0;
+        margin: 0;
+        z-index: 1;
     }
 
     .timeline-label {
-        font-size: 0.85rem;
+        font-size: 0.95rem;
+        line-height: 1.1;
+        white-space: nowrap;
+        transform: none;
+        display: inline-block;
+        position: relative;
+        z-index: 2;
+        font-weight: 700;
+        text-shadow: 0 1px 2px rgba(255, 255, 255, 0.65);
+    }
+
+    #timelineBar:not(.hidden) ~ #projectsGrid {
+        margin-top: 0.6rem;
     }
 
     /* Modal */
@@ -1705,6 +1757,36 @@ body {
     .project-link-card {
         padding: 1rem;
         font-size: 0.9rem;
+    }
+
+    .timeline-bar {
+        padding: 0.7rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .timeline-track {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.35rem;
+    }
+
+    .timeline-section {
+        padding: 0.5rem 0.15rem;
+        min-height: 2.75rem;
+    }
+
+    .timeline-icon {
+        font-size: 1.8rem;
+        opacity: 0.30;
+    }
+
+    .timeline-label {
+        font-size: 0.78rem;
+        transform: none;
+        letter-spacing: 0;
+    }
+
+    #timelineBar:not(.hidden) ~ #projectsGrid {
+        margin-top: 0.45rem;
     }
 
     .links-container {

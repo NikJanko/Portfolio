@@ -124,10 +124,10 @@ const projects = [
         link: 'https://example.com/cms-platform'
     },
 
-    // CURRENT PROJECTS
+    // PRESENT PROJECTS
     {
         id: 5,
-        type: 'current',
+        type: 'present',
         title: 'AI-Powered Code Assistant',
         image: 'https://via.placeholder.com/250x180?text=AI+Assistant',
         summary: 'An AI code completion and refactoring tool integrated with popular IDEs. Uses machine learning to provide context-aware suggestions and automated code improvements.',
@@ -138,7 +138,7 @@ const projects = [
     },
     {
         id: 6,
-        type: 'current',
+        type: 'present',
         title: 'Collaborative Design Platform',
         image: 'https://via.placeholder.com/250x180?text=Design+Tool',
         summary: 'Real-time collaborative design tool similar to Figma. Multiple users can edit simultaneously with live updates and version history.',
@@ -149,7 +149,7 @@ const projects = [
     },
     {
         id: 7,
-        type: 'current',
+        type: 'present',
         title: 'DevOps Pipeline Automation',
         image: 'https://via.placeholder.com/250x180?text=DevOps',
         summary: 'Automated CI/CD pipeline tool that streamlines deployment processes. Integrates with GitHub, Docker, and Kubernetes for seamless deployment.',
@@ -160,7 +160,7 @@ const projects = [
     },
     {
         id: 8,
-        type: 'current',
+        type: 'present',
         title: 'Financial Dashboard',
         image: 'https://via.placeholder.com/250x180?text=Finance',
         summary: 'Interactive financial analytics dashboard for tracking investments and market trends. Real-time data updates with predictive analytics.',

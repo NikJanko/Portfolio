@@ -2,8 +2,9 @@
 // PROJECTS PAGE FUNCTIONALITY
 // ============================================
 
-let currentFilter = 'all'; // all, past, current, future
+let currentFilter = 'all'; // all, dead, past, present, future
 let timelineEnabled = false;
+let selectedTimelineIndex = 2;
 
 document.addEventListener('DOMContentLoaded', function() {
     initializeProjectsPage();
@@ -18,16 +19,17 @@ function initializeProjectsPage() {
     // Check URL parameters for filter
     const urlParams = new URLSearchParams(window.location.search);
     const filter = urlParams.get('filter');
-    if (filter && ['past', 'current', 'future'].includes(filter)) {
-        currentFilter = filter;
+    if (filter && ['dead', 'past', 'current', 'present', 'future'].includes(filter)) {
+        currentFilter = filter === 'current' ? 'present' : filter;
         // Enable timeline and set appropriate position
         document.getElementById('timelineToggle').checked = true;
         toggleTimeline();
         
         // Set slider position based on filter
-        const sliderValue = filter === 'past' ? 0 : filter === 'current' ? 1 : 2;
-        document.getElementById('timelineSlider').value = sliderValue;
-        updateTimelineFilter(sliderValue);
+        const normalizedFilter = filter === 'current' ? 'present' : filter;
+        const indexMap = { dead: 0, past: 1, present: 2, future: 3 };
+        selectedTimelineIndex = indexMap[normalizedFilter];
+        updateTimelineFilter(selectedTimelineIndex);
     } else {
         renderProjects('all');
     }
@@ -49,9 +51,8 @@ function toggleTimeline() {
     if (timelineEnabled) {
         timelineBar.classList.remove('hidden');
         sectionHeaders.classList.add('hidden');
-        currentFilter = 'current'; // Default to current when enabling timeline
-        document.getElementById('timelineSlider').value = 1;
-        updateTimelineFilter(1);
+        currentFilter = 'present'; // Default to present when enabling timeline
+        updateTimelineFilter(selectedTimelineIndex);
     } else {
         timelineBar.classList.add('hidden');
         sectionHeaders.classList.remove('hidden');
@@ -63,9 +64,12 @@ function toggleTimeline() {
 // TIMELINE SETUP
 // ============================================
 function setupTimeline() {
-    const slider = document.getElementById('timelineSlider');
-    slider.addEventListener('input', function(e) {
-        updateTimelineFilter(parseInt(e.target.value));
+    const sections = document.querySelectorAll('.timeline-section');
+    sections.forEach((section, index) => {
+        section.addEventListener('click', () => {
+            selectedTimelineIndex = index;
+            updateTimelineFilter(index);
+        });
     });
 }
 
@@ -82,9 +86,11 @@ function updateTimelineFilter(value) {
     // Determine which filter to apply
     let filter;
     if (value === 0) {
-        filter = 'past';
+        filter = 'dead';
     } else if (value === 1) {
-        filter = 'current';
+        filter = 'past';
+    } else if (value === 2) {
+        filter = 'present';
     } else {
         filter = 'future';
     }
@@ -100,7 +106,7 @@ function renderProjects(filter) {
     const grid = document.getElementById('projectsGrid');
     const sectionHeaders = document.getElementById('sectionHeaders');
 
-    // Standard mode: show projects grouped under Past/Current/Future areas.
+    // Standard mode: show projects grouped under Dead/Past/Present/Future areas.
     if (filter === 'all') {
         renderGroupedProjects();
         grid.classList.add('hidden');
@@ -133,8 +139,9 @@ function renderProjects(filter) {
 function renderGroupedProjects() {
     const sectionHeaders = document.getElementById('sectionHeaders');
     const groups = [
+        { type: 'dead', title: 'Dead Projects' },
         { type: 'past', title: 'Past Projects' },
-        { type: 'current', title: 'Current Projects' },
+        { type: 'present', title: 'Present Projects' },
         { type: 'future', title: 'Future Projects' }
     ];
 

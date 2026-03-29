@@ -35,47 +35,52 @@
     </nav>
 
     <section class="section projects-page">
-        <div class="section-title">Projects</div>
-
-        <!-- Toggle Switch -->
-        <div class="toggle-container">
-            <label class="toggle-switch">
-                <input type="checkbox" id="timelineToggle" class="toggle-input">
-                <span class="toggle-label">Enable Timeline View</span>
-            </label>
+        <div class="projects-header-row">
+            <!-- Toggle Switch -->
+            <div class="toggle-container">
+                <label class="toggle-switch">
+                    <input type="checkbox" id="timelineToggle" class="toggle-input">
+                    <span class="toggle-label">Timeline View</span>
+                </label>
+            </div>
+            <div class="section-title">Projects</div>
         </div>
 
         <!-- Timeline Bar (Hidden by default) -->
         <div id="timelineBar" class="timeline-bar hidden">
             <div class="timeline-track">
+                <div class="timeline-section dead">
+                    <span class="timeline-icon">🦴</span>
+                    <span class="timeline-label">Dead</span>
+                </div>
                 <div class="timeline-section past">
                     <span class="timeline-icon">🦖</span>
                     <span class="timeline-label">Past</span>
                 </div>
-                <div class="timeline-section current">
-                    <span class="timeline-icon">🏙️</span>
-                    <span class="timeline-label">Current</span>
+                <div class="timeline-section present">
+                    <span class="timeline-icon">🔨</span>
+                    <span class="timeline-label">Present</span>
                 </div>
                 <div class="timeline-section future">
                     <span class="timeline-icon">🚀</span>
                     <span class="timeline-label">Future</span>
                 </div>
             </div>
-            <div class="timeline-slider">
-                <input type="range" id="timelineSlider" min="0" max="2" value="1" class="slider">
-            </div>
         </div>
 
         <!-- Section Headers with Content (Hidden when timeline is active) -->
         <div id="sectionHeaders" class="section-headers">
             <div class="section-header">
+                <h3>Present Projects</h3>
+            </div>
+            <div class="section-header">
                 <h3>Past Projects</h3>
             </div>
             <div class="section-header">
-                <h3>Current Projects</h3>
+                <h3>Future Projects</h3>
             </div>
             <div class="section-header">
-                <h3>Future Projects</h3>
+                <h3>Dead Projects</h3>
             </div>
         </div>
 
