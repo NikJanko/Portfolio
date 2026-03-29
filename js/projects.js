@@ -40,7 +40,7 @@ async function initializeProjectsPage() {
 
 async function loadProjectsData() {
     try {
-        const response = await fetch('content.json');
+        const response = await fetch('../data/content.json');
         if (!response.ok) {
             throw new Error('Unable to load content.json');
         }

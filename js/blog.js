@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 async function initializeBlogPage() {
     try {
-        const response = await fetch('blog-data.json');
+        const response = await fetch('../data/blog-data.json');
         if (!response.ok) {
             throw new Error('Unable to read blog-data.json');
         }

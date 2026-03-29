@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nikola Jankovic Works</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Decorative Elements -->
+    <div id="leftDecorations" class="decorations left-decorations"></div>
+    <div id="rightDecorations" class="decorations right-decorations"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="nav-logo"><span class="nav-logo-full">Nikola Jankovic</span><span class="nav-logo-short">NJ</span></h1>
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <label class="dark-mode-toggle">
+                <input type="checkbox" id="darkModeToggle" class="dark-mode-input">
+                <span class="dark-mode-emoji" id="darkModeEmoji">☀️</span>
+            </label>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#intro">Home</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#awards">Awards</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="#links">Links</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Intro Section -->
+    <section id="intro" class="section intro-section">
+        <div class="section-title">Introduction</div>
+        <div id="intro-container" class="intro-container"></div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section education-section">
+        <div class="section-title">Education</div>
+        <div id="education-container" class="education-container"></div>
+    </section>
+
+    <!-- Awards Section -->
+    <section id="awards" class="section awards-section">
+        <div class="section-title">Awards & Achievements</div>
+        <div id="awards-container" class="awards-container"></div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section projects-section">
+        <div class="section-title">Projects</div>
+        <div class="projects-intro">
+            <p>I've worked on various projects spanning different technologies and domains. Below is a selection of my recent work in past, current, and future projects. Click on any project to learn more about the challenges, tools, and implementations involved.</p>
+        </div>
+        <div class="projects-links">
+            <a href="projects.html?filter=current" class="project-link-card">Project Page</a>
+            <!-- <a href="projects.html?filter=current" class="project-link-card">Current Projects</a>
+            <a href="projects.html?filter=future" class="project-link-card">Future Projects</a> -->
+        </div>
+    </section>
+
+    <!-- Media Links Section -->
+    <section id="links" class="section links-section">
+        <div class="section-title">Connect With Me</div>
+        <div id="links-container" class="links-container"></div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2026 My Portfolio. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/darkmode.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

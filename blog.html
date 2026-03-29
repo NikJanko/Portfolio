@@ -2,106 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="0; url=app/blog.html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Redirecting...</title>
+    <script>
+        window.location.replace('app/blog.html');
+    </script>
 </head>
 <body>
-    <div id="leftDecorations" class="decorations left-decorations"></div>
-    <div id="rightDecorations" class="decorations right-decorations"></div>
-
-    <nav class="navbar">
-        <div class="nav-container">
-            <h1 class="nav-logo"><a href="index.html"><span class="nav-logo-full">My Portfolio</span><span class="nav-logo-short">NJ</span></a></h1>
-            <button class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <label class="dark-mode-toggle">
-                <input type="checkbox" id="darkModeToggle" class="dark-mode-input">
-                <span class="dark-mode-emoji" id="darkModeEmoji">☀️</span>
-            </label>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html#intro">Home</a></li>
-                <li><a href="index.html#education">Education</a></li>
-                <li><a href="index.html#awards">Awards</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="index.html#links">Links</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <section class="section blog-page">
-        <div class="blog-header-row">
-            <h2 class="section-title">Blog</h2>
-            <button id="archiveToggle" class="archive-toggle">☰ Archive</button>
-        </div>
-
-        <p class="blog-note">LinkedIn auto-post sync: this page supports storing your LinkedIn post URLs in the JSON data. Full automatic import requires LinkedIn API access and authentication.</p>
-
-        <div class="blog-layout">
-            <aside id="blogSidebar" class="blog-sidebar">
-                <div class="sidebar-title">Archive</div>
-                <div id="archiveTree" class="archive-tree"></div>
-            </aside>
-
-            <div id="archiveBackdrop" class="archive-backdrop"></div>
-
-            <main class="blog-main">
-                <div class="tags-filter-wrap">
-                    <span class="tags-filter-label">Filter by tag:</span>
-                    <select id="tagFilterSelect" class="tag-filter-select" aria-label="Filter posts by tag"></select>
-                </div>
-
-                <div id="blogCards" class="blog-cards"></div>
-            </main>
-        </div>
-    </section>
-
-    <div id="blogFocusOverlay" class="blog-focus-overlay hidden">
-        <div class="blog-focus-content">
-            <button id="blogFocusClose" class="blog-focus-close">&times;</button>
-
-            <div class="blog-focus-header">
-                <div id="focusMeta" class="blog-card-meta"></div>
-                <div id="focusTitleRow" class="blog-title-row"></div>
-                <hr>
-            </div>
-
-            <div id="focusContent" class="blog-focus-scroll"></div>
-
-            <hr>
-
-            <div class="blog-focus-footer">
-                <div id="focusLinks" class="blog-links"></div>
-                <button id="focusGalleryBtn" class="gallery-btn" title="Open images" aria-label="Open images gallery">
-                    <img src="alt-Images/solid-camera.svg" alt="Camera icon">
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div id="galleryOverlay" class="gallery-overlay hidden">
-        <div class="gallery-panel">
-            <button id="galleryClose" class="gallery-close">&times;</button>
-            <div id="galleryGrid" class="gallery-grid"></div>
-        </div>
-    </div>
-
-    <div id="imageViewer" class="image-viewer hidden">
-        <button id="imageViewerClose" class="viewer-close">&times;</button>
-        <button id="viewerPrev" class="viewer-nav viewer-prev">‹</button>
-        <img id="viewerImage" src="" alt="Blog image">
-        <button id="viewerNext" class="viewer-nav viewer-next">›</button>
-    </div>
-
-    <footer class="footer">
-        <p>&copy; 2026 My Portfolio. All rights reserved.</p>
-    </footer>
-
-    <script src="darkmode.js"></script>
-    <script src="blog.js"></script>
+    <p>Redirecting to <a href="app/blog.html">app/blog.html</a>...</p>
 </body>
 </html>

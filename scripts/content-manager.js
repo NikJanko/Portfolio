@@ -4,8 +4,8 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
-const CONTENT_PATH = path.join(ROOT, 'content.json');
-const BLOG_PATH = path.join(ROOT, 'blog-data.json');
+const CONTENT_PATH = path.join(ROOT, 'data', 'content.json');
+const BLOG_PATH = path.join(ROOT, 'data', 'blog-data.json');
 
 function readJson(filePath) {
     return JSON.parse(fs.readFileSync(filePath, 'utf8'));
@@ -13,6 +13,12 @@ function readJson(filePath) {
 
 function writeJson(filePath, data) {
     fs.writeFileSync(filePath, `${JSON.stringify(data, null, 2)}\n`, 'utf8');
+}
+
+function isTemplatePayload(filePath) {
+    const templatesDir = path.join(ROOT, 'templates') + path.sep;
+    const normalizedPath = path.resolve(filePath);
+    return normalizedPath.startsWith(templatesDir) && normalizedPath.endsWith('.json');
 }
 
 function nextNumericId(items) {
@@ -24,8 +30,35 @@ function usage() {
     console.log('Usage:');
     console.log('  node scripts/content-manager.js add <project|award|education|blog> <path-to-json>');
     console.log('  node scripts/content-manager.js delete <project|award|education|blog> <id>');
+    console.log('  node scripts/content-manager.js list <project|award|education|blog>');
     console.log('  node scripts/content-manager.js new-template blog [output-path]');
+    console.log('  node scripts/content-manager.js help');
     process.exit(1);
+}
+
+function printHelp() {
+    console.log('Available direct commands:');
+    console.log('  node scripts/content-manager.js add <project|award|education|blog> <path-to-json>');
+    console.log('  node scripts/content-manager.js list <project|award|education|blog>');
+    console.log('  node scripts/content-manager.js delete <project|award|education|blog> <id>');
+    console.log('  node scripts/content-manager.js new-template blog [output-path]');
+    console.log('  node scripts/content-manager.js help');
+    console.log('');
+    console.log('Available npm scripts:');
+    console.log('  npm run help');
+    console.log('  npm run add:project -- <path-to-json>');
+    console.log('  npm run add:award -- <path-to-json>');
+    console.log('  npm run add:education -- <path-to-json>');
+    console.log('  npm run add:blog -- <path-to-json>');
+    console.log('  npm run list:projects');
+    console.log('  npm run list:awards');
+    console.log('  npm run list:education');
+    console.log('  npm run list:blogs');
+    console.log('  npm run delete:project -- <id>');
+    console.log('  npm run delete:award -- <id>');
+    console.log('  npm run delete:education -- <id>');
+    console.log('  npm run delete:blog -- <id>');
+    console.log('  npm run new:blog-template');
 }
 
 function toIdString(value) {
@@ -145,8 +178,7 @@ function addBlog(payloadPath) {
     validateBlog(post);
 
     if (!post.id) {
-        const timestamp = Date.now();
-        post.id = `post-${timestamp}`;
+        post.id = generateBlogId(blogPosts, post.date);
     }
 
     blogPosts.unshift(post);
@@ -198,6 +230,26 @@ function getTodayDate() {
     return new Date().toISOString().slice(0, 10);
 }
 
+function generateBlogId(blogPosts, date) {
+    const compactDate = String(date || getTodayDate()).replace(/-/g, '');
+    const prefix = `post-${compactDate}-`;
+    const used = new Set(
+        blogPosts
+            .map(post => toIdString(post.id))
+            .filter(id => id.startsWith(prefix))
+    );
+
+    let sequence = 1;
+    while (true) {
+        const suffix = String(sequence).padStart(2, '0');
+        const candidate = `${prefix}${suffix}`;
+        if (!used.has(candidate)) {
+            return candidate;
+        }
+        sequence += 1;
+    }
+}
+
 function createBlogTemplate(outputPath) {
     const date = getTodayDate();
     const template = {
@@ -228,11 +280,57 @@ function createBlogTemplate(outputPath) {
     console.log(`Created blog template: ${targetPath}`);
 }
 
+function printList(label, items) {
+    if (!items.length) {
+        console.log(`No ${label} found.`);
+        return;
+    }
+
+    items.forEach(item => {
+        const id = toIdString(item.id);
+        const title = item.title || item.platform || item.subject || 'Untitled';
+        console.log(`${id} | ${title}`);
+    });
+}
+
+function listEntries(type) {
+    if (type === 'project') {
+        const content = readJson(CONTENT_PATH);
+        printList('projects', content.projects || []);
+        return;
+    }
+
+    if (type === 'award') {
+        const content = readJson(CONTENT_PATH);
+        printList('awards', content.awards || []);
+        return;
+    }
+
+    if (type === 'education') {
+        const content = readJson(CONTENT_PATH);
+        printList('education items', content.education || []);
+        return;
+    }
+
+    if (type === 'blog') {
+        const blogPosts = readJson(BLOG_PATH);
+        printList('blog posts', blogPosts || []);
+        return;
+    }
+
+    usage();
+}
+
 function main() {
     const [, , command, type, arg] = process.argv;
 
     if (!command) {
         usage();
+    }
+
+    if (command === 'help' || command === '--help' || command === '-h') {
+        printHelp();
+        return;
     }
 
     if (command === 'add') {
@@ -256,6 +354,12 @@ function main() {
         } else {
             usage();
         }
+
+        if (isTemplatePayload(resolvedPayloadPath)) {
+            fs.unlinkSync(resolvedPayloadPath);
+            console.log(`Deleted template file: ${resolvedPayloadPath}`);
+        }
+
         return;
     }
 
@@ -283,6 +387,14 @@ function main() {
             usage();
         }
         createBlogTemplate(arg);
+        return;
+    }
+
+    if (command === 'list') {
+        if (!type) {
+            usage();
+        }
+        listEntries(type);
         return;
     }
 

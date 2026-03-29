@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Decorative Elements -->
+    <div id="leftDecorations" class="decorations left-decorations"></div>
+    <div id="rightDecorations" class="decorations right-decorations"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="nav-logo"><a href="index.html"><span class="nav-logo-full">My Portfolio</span><span class="nav-logo-short">NJ</span></a></h1>
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <label class="dark-mode-toggle">
+                <input type="checkbox" id="darkModeToggle" class="dark-mode-input">
+                <span class="dark-mode-emoji" id="darkModeEmoji">☀️</span>
+            </label>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html#intro">Home</a></li>
+                <li><a href="index.html#education">Education</a></li>
+                <li><a href="index.html#awards">Awards</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="index.html#links">Links</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="section projects-page">
+        <div class="projects-header-row">
+            <!-- Toggle Switch -->
+            <div class="toggle-container">
+                <label class="toggle-switch">
+                    <input type="checkbox" id="timelineToggle" class="toggle-input">
+                    <span class="toggle-label">Timeline View</span>
+                </label>
+            </div>
+            <div class="section-title">Projects</div>
+        </div>
+
+        <!-- Timeline Bar (Hidden by default) -->
+        <div id="timelineBar" class="timeline-bar hidden">
+            <div class="timeline-track">
+                <div class="timeline-section dead">
+                    <span class="timeline-icon">🦴</span>
+                    <span class="timeline-label">Dead</span>
+                </div>
+                <div class="timeline-section past">
+                    <span class="timeline-icon">🦖</span>
+                    <span class="timeline-label">Past</span>
+                </div>
+                <div class="timeline-section present">
+                    <span class="timeline-icon">🔨</span>
+                    <span class="timeline-label">Present</span>
+                </div>
+                <div class="timeline-section future">
+                    <span class="timeline-icon">🚀</span>
+                    <span class="timeline-label">Future</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Headers with Content (Hidden when timeline is active) -->
+        <div id="sectionHeaders" class="section-headers">
+            <div class="section-header">
+                <h3>Present Projects</h3>
+            </div>
+            <div class="section-header">
+                <h3>Past Projects</h3>
+            </div>
+            <div class="section-header">
+                <h3>Future Projects</h3>
+            </div>
+            <div class="section-header">
+                <h3>Dead Projects</h3>
+            </div>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="projects-grid" id="projectsGrid"></div>
+    </section>
+
+    <!-- Modal for Expanded Project Card -->
+    <div id="projectModal" class="modal hidden">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-header">
+                <img id="modalImage" src="" alt="Project Image" class="modal-image">
+            </div>
+            <div class="modal-body">
+                <h2 id="modalTitle"></h2>
+                <a id="modalProjectLink" class="modal-project-link" href="#" target="_blank" rel="noopener noreferrer" title="Visit Project">Visit Project</a>
+                <div class="modal-section">
+                    <h3>Summary</h3>
+                    <p id="modalSummary"></p>
+                </div>
+                <div class="modal-section">
+                    <h3>Challenges</h3>
+                    <p id="modalChallenges"></p>
+                </div>
+                <div class="modal-section">
+                    <h3>Tools & Technologies</h3>
+                    <div id="modalTools" class="tools-list"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2026 My Portfolio. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/darkmode.js"></script>
+    <script src="../js/projects.js"></script>
+</body>
+</html>

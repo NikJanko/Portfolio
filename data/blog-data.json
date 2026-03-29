@@ -1,10 +1,118 @@
 [
   {
+    "title": "New Blog Post 3",
+    "date": "2026-03-29",
+    "author": "Nikola Jankovic",
+    "tags": [
+      "tag1",
+      "tag2"
+    ],
+    "summary": "Short summary for the card preview.",
+    "content": [
+      "Paragraph 1",
+      "Paragraph 2"
+    ],
+    "externalLinks": [
+      {
+        "title": "Reference",
+        "url": "https://example.com"
+      }
+    ],
+    "images": [
+      "photos/image1.png"
+    ],
+    "linkedinPostUrl": "",
+    "id": "post-20260329-02"
+  },
+  {
+    "title": "New Blog Post 2",
+    "date": "2026-03-29",
+    "author": "Nikola Jankovic",
+    "tags": [
+      "tag1",
+      "tag2"
+    ],
+    "summary": "Short summary for the card preview.",
+    "content": [
+      "Paragraph 1",
+      "Paragraph 2"
+    ],
+    "externalLinks": [
+      {
+        "title": "Reference",
+        "url": "https://example.com"
+      }
+    ],
+    "images": [
+      "photos/image1.png"
+    ],
+    "linkedinPostUrl": "",
+    "id": "post-20260329-01"
+  },
+  {
+    "title": "New Blog Post",
+    "date": "2026-03-29",
+    "author": "Nikola Jankovic",
+    "tags": [
+      "tag1",
+      "tag2"
+    ],
+    "summary": "Short summary for the card preview.",
+    "content": [
+      "Paragraph 1",
+      "Paragraph 2"
+    ],
+    "externalLinks": [
+      {
+        "title": "Reference",
+        "url": "https://example.com"
+      }
+    ],
+    "images": [],
+    "linkedinPostUrl": "",
+    "id": "post-1774822629020"
+  },
+  {
+    "title": "New Blog Post",
+    "date": "2026-03-29",
+    "author": "Nikola Jankovic",
+    "tags": [
+      "tag1",
+      "tag2"
+    ],
+    "summary": "Short summary for the card preview.",
+    "content": [
+      "Paragraph 1",
+      "Paragraph 2"
+    ],
+    "externalLinks": [
+      {
+        "title": "Reference",
+        "url": "https://example.com"
+      }
+    ],
+    "images": [
+      "photos/image1.png"
+    ],
+    "linkedinPostUrl": "",
+    "id": "post-1774822543055"
+  },
+  {
     "id": "post-001",
     "title": "Building a Robust Portfolio Workflow",
     "date": "2026-03-12",
     "author": "Nikola Jankovic",
-    "tags": ["workflow", "frontend", "portfolio", "AI", "test1", "test2", "test3", "test4", "test5"],
+    "tags": [
+      "workflow",
+      "frontend",
+      "portfolio",
+      "AI",
+      "test1",
+      "test2",
+      "test3",
+      "test4",
+      "test5"
+    ],
     "summary": "How I moved my portfolio from static sections to modular data-driven pages with cleaner maintenance.",
     "content": [
       "I wanted my portfolio to be easier to evolve, so I moved repeated content into data structures and rendered it with JavaScript. A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A I wanted my portfolio to be easier to evolve, so I moved repeated content into data structures and rendered it with JavaScript. A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A I wanted my portfolio to be easier to evolve, so I moved repeated content into data structures and rendered it with JavaScript. A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A I wanted my portfolio to be easier to evolve, so I moved repeated content into data structures and rendered it with JavaScript. A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A I wanted my portfolio to be easier to evolve, so I moved repeated content into data structures and rendered it with JavaScript. A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A I wanted my portfolio to be easier to evolve, so I moved repeated content into data structures and rendered it with JavaScript. A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A ",
@@ -33,7 +141,11 @@
     "title": "Designing Better Mobile Navigation",
     "date": "2026-02-21",
     "author": "Nikola Jankovic",
-    "tags": ["css", "responsive", "ux"],
+    "tags": [
+      "css",
+      "responsive",
+      "ux"
+    ],
     "summary": "A breakdown of refining mobile navigation for compact screens while preserving usability.",
     "content": [
       "Compact screens demand stricter layout intent. I focused on predictable alignment and clear touch targets.",
@@ -57,7 +169,11 @@
     "title": "Timeline-Based Project Storytelling",
     "date": "2025-11-05",
     "author": "Nikola Jankovic",
-    "tags": ["javascript", "ui", "product"],
+    "tags": [
+      "javascript",
+      "ui",
+      "product"
+    ],
     "summary": "Using timeline categories to make project status clearer: present, past, future, and dead.",
     "content": [
       "Timeline filtering helps visitors understand what is active versus archived or dropped.",
