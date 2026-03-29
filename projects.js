@@ -2,16 +2,19 @@
 // PROJECTS PAGE FUNCTIONALITY
 // ============================================
 
+let projects = [];
 let currentFilter = 'all'; // all, dead, past, present, future
 let timelineEnabled = false;
 let selectedTimelineIndex = 2;
 
-document.addEventListener('DOMContentLoaded', function() {
-    initializeProjectsPage();
+document.addEventListener('DOMContentLoaded', async function() {
+    await initializeProjectsPage();
     setupHamburgerMenu();
 });
 
-function initializeProjectsPage() {
+async function initializeProjectsPage() {
+    projects = await loadProjectsData();
+
     setupToggle();
     setupTimeline();
     setupModal();
@@ -32,6 +35,20 @@ function initializeProjectsPage() {
         updateTimelineFilter(selectedTimelineIndex);
     } else {
         renderProjects('all');
+    }
+}
+
+async function loadProjectsData() {
+    try {
+        const response = await fetch('content.json');
+        if (!response.ok) {
+            throw new Error('Unable to load content.json');
+        }
+        const data = await response.json();
+        return Array.isArray(data.projects) ? data.projects : [];
+    } catch (error) {
+        console.error(error);
+        return [];
     }
 }
 

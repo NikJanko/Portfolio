@@ -2,17 +2,25 @@
 // MAIN PAGE INTERACTIONS
 // ============================================
 
-document.addEventListener('DOMContentLoaded', function() {
-    initializeMainPage();
+let portfolioData = null;
+
+document.addEventListener('DOMContentLoaded', async function() {
     setupHamburgerMenu();
+    await initializeMainPage();
 });
 
-function initializeMainPage() {
+async function initializeMainPage() {
+    portfolioData = await loadPortfolioData();
+    if (!portfolioData) {
+        renderDataLoadError();
+        return;
+    }
+
     // Populate sections from data
-    populateIntro();
-    populateEducation();
-    populateAwards();
-    populateSocialLinks();
+    populateIntro(portfolioData.intro);
+    populateEducation(portfolioData.education);
+    populateAwards(portfolioData.awards);
+    populateSocialLinks(portfolioData.socialLinks);
     
     // Smooth scroll is handled by CSS scroll-behavior property
     
@@ -61,30 +69,59 @@ function initializeMainPage() {
     }, 100);
 }
 
+async function loadPortfolioData() {
+    try {
+        const response = await fetch('content.json');
+        if (!response.ok) {
+            throw new Error('Unable to load content.json');
+        }
+        return await response.json();
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
+
+function renderDataLoadError() {
+    const placeholders = [
+        ['intro-container', 'Could not load content.json.'],
+        ['education-container', 'Could not load content.json.'],
+        ['awards-container', 'Could not load content.json.'],
+        ['links-container', 'Could not load content.json.']
+    ];
+
+    placeholders.forEach(([id, message]) => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.innerHTML = `<p>${message}</p>`;
+        }
+    });
+}
+
 // ============================================
 // SECTION POPULATION FUNCTIONS
 // ============================================
 
-function populateIntro() {
+function populateIntro(introData) {
     const introContainer = document.getElementById('intro-container');
     
     const html = `
         <div class="intro-subsection intro-image">
-            <img src="${intro.profileImage}" alt="Profile Picture">
+            <img src="${introData.profileImage}" alt="Profile Picture">
         </div>
         <div class="intro-subsection intro-text">
             <h2>Welcome to My Portfolio</h2>
-            <p>${intro.description}</p>
+            <p>${introData.description}</p>
         </div>
     `;
     
     introContainer.innerHTML = html;
 }
 
-function populateEducation() {
+function populateEducation(educationData) {
     const educationContainer = document.getElementById('education-container');
     
-    const html = education.map(edu => `
+    const html = educationData.map(edu => `
         <div class="education-item">
             <div class="education-image">
                 <img src="${edu.image}" alt="${edu.institution}">
@@ -101,10 +138,10 @@ function populateEducation() {
     educationContainer.innerHTML = html;
 }
 
-function populateAwards() {
+function populateAwards(awardsData) {
     const awardsContainer = document.getElementById('awards-container');
     
-    const html = awards.map(award => `
+    const html = awardsData.map(award => `
         <div class="award-item">
             <div class="award-image">
                 <img src="${award.image}" alt="${award.title}">
@@ -119,10 +156,10 @@ function populateAwards() {
     awardsContainer.innerHTML = html;
 }
 
-function populateSocialLinks() {
+function populateSocialLinks(socialLinksData) {
     const linksContainer = document.getElementById('links-container');
     
-    const html = socialLinks.map(link => `
+    const html = socialLinksData.map(link => `
         <a href="${link.url}" class="media-link" target="_blank" rel="noopener noreferrer">
             <img src="${link.image}" alt="${link.platform}">
             <span>${link.platform}</span>

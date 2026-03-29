@@ -1,0 +1,13 @@
+{
+  "type": "present",
+  "title": "New Project Title",
+  "image": "https://example.com/project-image.png",
+  "summary": "Full project summary used in the expanded project view.",
+  "cardSummary": "Short summary shown on the minimized project card.",
+  "challenges": "Main implementation challenges and tradeoffs.",
+  "tools": [
+    "Tool A",
+    "Tool B"
+  ],
+  "link": "https://example.com/project-link"
+}

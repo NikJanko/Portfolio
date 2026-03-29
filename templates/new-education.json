@@ -1,0 +1,11 @@
+{
+  "title": "Bachelor of Science (BSc)",
+  "subject": "Computer Science",
+  "institution": "University Name",
+  "duration": "2022 - 2026",
+  "image": "https://example.com/school-image.png",
+  "coursework": [
+    "Course 1",
+    "Course 2"
+  ]
+}

@@ -8,12 +8,72 @@ A modern, fully responsive portfolio website with an interactive projects page f
 portfolio/
 ├── index.html          # Main portfolio page
 ├── projects.html       # Projects detail page with timeline
+├── blog.html           # Blog page
 ├── styles.css          # All styling (responsive design)
-├── data.js            # Modular project data
+├── content.json        # Portfolio content data (intro, education, awards, links, projects)
+├── blog-data.json      # Blog posts data
 ├── main.js            # Main page interactions
 ├── projects.js        # Projects page logic
+├── blog.js             # Blog page logic
+├── scripts/
+│   └── content-manager.js # CLI to add content entries
+├── templates/
+│   ├── new-project.json
+│   ├── new-award.json
+│   ├── new-education.json
+│   └── new-blog-post.json
 └── README.md          # This file
 ```
+
+## JSON-First Content Model
+All site content is now loaded from JSON files.
+
+- Main pages read from `content.json`
+- Blog reads from `blog-data.json`
+
+The old `data.js` file can be kept as legacy reference, but it is no longer used by `index.html` or `projects.html`.
+
+## Add Content via Script
+You can add new entries without manual edits by using the content manager.
+
+1. Copy a template from `templates/` and fill it in.
+2. Run one of these commands:
+
+```bash
+node scripts/content-manager.js add project templates/new-project.json
+node scripts/content-manager.js add award templates/new-award.json
+node scripts/content-manager.js add education templates/new-education.json
+node scripts/content-manager.js add blog templates/new-blog-post.json
+```
+
+Or use the shorter npm commands from `package.json`:
+
+```bash
+npm run add:project -- templates/new-project.json
+npm run add:award -- templates/new-award.json
+npm run add:education -- templates/new-education.json
+npm run add:blog -- templates/new-blog-post.json
+```
+
+Create a fresh blog template with today's date:
+
+```bash
+npm run new:blog-template
+```
+
+Delete entries by id:
+
+```bash
+npm run delete:project -- 12
+npm run delete:award -- 3
+npm run delete:education -- 2
+npm run delete:blog -- post-001
+```
+
+Notes:
+- If `id` is omitted, the script auto-generates one.
+- Blog posts are inserted at the top of `blog-data.json`.
+- Requires Node.js installed locally.
 
 ## Features
 
@@ -52,12 +112,12 @@ portfolio/
 ## Customization
 
 ### Adding/Editing Projects
-Edit `data.js` and add to the `projects` array:
+Edit `content.json` and add to the `projects` array:
 
 ```javascript
 {
     id: 13,                           // Unique ID
-    type: 'current',                  // 'past', 'current', or 'future'
+   type: 'present',                  // 'dead', 'past', 'present', or 'future'
     title: 'Your Project Title',      // Project name
     image: 'http://image-url.com',    // Project image URL
     summary: 'Brief description...',  // Short summary (shows in modal)
@@ -111,15 +171,16 @@ To change colors, search for `667eea` and `764ba2` in styles.css
 
 ## URL Parameters
 Navigate directly to filtered project views:
+- `projects.html?filter=dead` - Shows dead projects in timeline
 - `projects.html?filter=past` - Shows past projects in timeline
-- `projects.html?filter=current` - Shows current projects
+- `projects.html?filter=present` - Shows present projects
 - `projects.html?filter=future` - Shows future projects
 
 ## Modular Architecture
 The project data is completely separated from logic, making it easy to:
 - Add projects by inserting one object into the `projects` array
 - Update project information without touching any logic
-- Integrate with a backend API by replacing `data.js` with API calls
+- Integrate with a backend API by replacing `content.json`/`blog-data.json` with API calls
 - Export data to JSON for external management
 
 ## Future Enhancements
