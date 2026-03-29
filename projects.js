@@ -126,7 +126,12 @@ function createProjectCard(project, index) {
     const typeLabel = project.type.charAt(0).toUpperCase() + project.type.slice(1);
     
     card.innerHTML = `
-        <img src="${project.image}" alt="${project.title}" class="project-card-image">
+        <div class="project-card-image-wrapper">
+            <img src="${project.image}" alt="${project.title}" class="project-card-image">
+            <a href="${project.link}" target="_blank" rel="noopener noreferrer" class="project-link-icon" title="Visit Project">
+                <span>🔗</span>
+            </a>
+        </div>
         <div class="project-card-content">
             <div class="project-card-status ${project.type}">${typeLabel}</div>
             <h3 class="project-card-title">${project.title}</h3>
