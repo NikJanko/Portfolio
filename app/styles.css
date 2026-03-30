@@ -257,13 +257,13 @@ body {
 }
 
 .dark-mode-emoji::after {
-    content: '☀';
+    content: '☀️';
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: #83550f;
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     text-shadow: 0 0 4px rgba(255, 227, 138, 0.55);
 }
 

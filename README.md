@@ -1,28 +1,39 @@
 # Portfolio Website
 
-Responsive portfolio site with three pages:
+A JSON-driven personal portfolio with three main pages:
 
-- Home page (`app/index.html`)
-- Projects page (`app/projects.html`)
-- Blog page (`app/blog.html`)
+- Home (`app/index.html`)
+- Projects (`app/projects.html`)
+- Blog (`app/blog.html`)
 
-Content is JSON-driven and managed with a local Node.js CLI.
+The site uses plain HTML/CSS/JavaScript and a Node.js content manager for updating JSON content.
 
-## Folder Structure
+## Current Highlights
+
+- Milestones section on Home (data key remains `awards` in `data/content.json`):
+  - sorted by `dateAwarded` (newest first)
+  - carousel-style pagination showing 5 items per step
+- Blog archive:
+  - year/month archive tree
+  - `All time` button to reset to default all-posts view (date-sorted)
+- Responsive layout across desktop/tablet/mobile
+- Light/Dark mode support
+
+## Project Structure
 
 ```text
-portfolio/
+Portfolio/
 ├── app/
 │   ├── index.html
 │   ├── projects.html
 │   ├── blog.html
 │   └── styles.css
 ├── js/
-│   ├── darkmode.js
 │   ├── main.js
 │   ├── projects.js
 │   ├── blog.js
-│   └── data.js (legacy, not used)
+│   ├── darkmode.js
+│   └── data.js
 ├── data/
 │   ├── content.json
 │   └── blog-data.json
@@ -33,40 +44,81 @@ portfolio/
 │   ├── new-award.json
 │   ├── new-education.json
 │   └── new-blog-post.json
-├── Images/
 ├── icons/
-├── photos/
-├── projects/
+├── images/
+├── index.html
+├── projects.html
+├── blog.html
 ├── package.json
 └── README.md
 ```
 
-## Data Files
+Notes:
 
-- `data/content.json`
-  - intro, education, awards/milestones (with `dateAwarded`), social links, projects
-- `data/blog-data.json`
-  - blog posts, tags, links, images, LinkedIn URL support
+- `app/` contains the active page files and shared stylesheet.
+- Root-level `index.html`, `projects.html`, and `blog.html` are also present in this repository.
+
+## Data Model
+
+### `data/content.json`
+
+Contains:
+
+- `intro`
+- `education`
+- `awards` (rendered as Milestones on Home)
+- `socialLinks`
+- `projects`
+
+Milestone/award entries should include:
+
+- `title`
+- `issuer`
+- `dateAwarded` (recommended format: `YYYY-MM-DD`)
+- `image`
+
+### `data/blog-data.json`
+
+Blog posts with fields like:
+
+- `id`
+- `title`
+- `date`
+- `author`
+- `tags`
+- `summary`
+- `content`
+- `externalLinks`
+- `images`
+- `linkedinPostUrl` (optional)
 
 ## Run Locally
 
-Use a local web server (Live Server, Five Server, or similar) and open:
+Use any local static server (for example Live Server in VS Code), then open:
 
 - `app/index.html`
 
 ## Content Manager CLI
 
-All commands run through:
+Base command:
 
-- `node scripts/content-manager.js`
+```bash
+node scripts/content-manager.js <command>
+```
+
+### Help
+
+```bash
+node scripts/content-manager.js help
+```
 
 ### Add Entries
 
 ```bash
-node scripts/content-manager.js add project templates/new-project.json
-node scripts/content-manager.js add award templates/new-award.json
-node scripts/content-manager.js add education templates/new-education.json
-node scripts/content-manager.js add blog templates/new-blog-post.json
+node scripts/content-manager.js add project <path-to-json>
+node scripts/content-manager.js add award <path-to-json>
+node scripts/content-manager.js add education <path-to-json>
+node scripts/content-manager.js add blog <path-to-json>
 ```
 
 ### List Entries
@@ -78,56 +130,48 @@ node scripts/content-manager.js list education
 node scripts/content-manager.js list blog
 ```
 
-### Delete Entries By ID
+### Delete Entries
 
 ```bash
-node scripts/content-manager.js delete project 12
-node scripts/content-manager.js delete award 3
-node scripts/content-manager.js delete education 2
-node scripts/content-manager.js delete blog post-001
+node scripts/content-manager.js delete project <id>
+node scripts/content-manager.js delete award <id>
+node scripts/content-manager.js delete education <id>
+node scripts/content-manager.js delete blog <id>
 ```
 
-### Generate New Blog Template
+### Generate Templates
 
 ```bash
 node scripts/content-manager.js new-template blog
-```
-
-Optional output path:
-
-```bash
-node scripts/content-manager.js new-template blog templates/my-blog-draft.json
-```
-
-### Generate New Award Template
-
-```bash
 node scripts/content-manager.js new-template award
 ```
 
-Optional output path:
+Optional custom output paths:
 
 ```bash
+node scripts/content-manager.js new-template blog templates/my-blog-draft.json
 node scripts/content-manager.js new-template award templates/my-milestone-draft.json
 ```
 
-## npm Shortcut Commands
+## npm Scripts
 
 ```bash
-npm run add:project -- templates/new-project.json
-npm run add:award -- templates/new-award.json
-npm run add:education -- templates/new-education.json
-npm run add:blog -- templates/new-blog-post.json
+npm run help
+
+npm run add:project -- <path-to-json>
+npm run add:award -- <path-to-json>
+npm run add:education -- <path-to-json>
+npm run add:blog -- <path-to-json>
 
 npm run list:projects
 npm run list:awards
 npm run list:education
 npm run list:blogs
 
-npm run delete:project -- 12
-npm run delete:award -- 3
-npm run delete:education -- 2
-npm run delete:blog -- post-001
+npm run delete:project -- <id>
+npm run delete:award -- <id>
+npm run delete:education -- <id>
+npm run delete:blog -- <id>
 
 npm run new:blog-template
 npm run new:award-template
@@ -135,6 +179,7 @@ npm run new:award-template
 
 ## Notes
 
-- The CLI auto-generates an `id` if one is missing.
-- New blog posts are inserted at the top of `data/blog-data.json`.
-- Node.js is required for CLI and npm scripts.
+- IDs are auto-generated when omitted for supported content types.
+- Blog posts are sorted by date descending in the UI.
+- Adding from a JSON file inside `templates/` deletes that template file after successful add.
+- Node.js is required for CLI/npm commands.
