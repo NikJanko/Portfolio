@@ -44,7 +44,7 @@ portfolio/
 ## Data Files
 
 - `data/content.json`
-  - intro, education, awards, social links, projects
+  - intro, education, awards/milestones (with `dateAwarded`), social links, projects
 - `data/blog-data.json`
   - blog posts, tags, links, images, LinkedIn URL support
 
@@ -99,6 +99,18 @@ Optional output path:
 node scripts/content-manager.js new-template blog templates/my-blog-draft.json
 ```
 
+### Generate New Award Template
+
+```bash
+node scripts/content-manager.js new-template award
+```
+
+Optional output path:
+
+```bash
+node scripts/content-manager.js new-template award templates/my-milestone-draft.json
+```
+
 ## npm Shortcut Commands
 
 ```bash
@@ -118,6 +130,7 @@ npm run delete:education -- 2
 npm run delete:blog -- post-001
 
 npm run new:blog-template
+npm run new:award-template
 ```
 
 ## Notes

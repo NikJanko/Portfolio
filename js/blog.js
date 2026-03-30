@@ -123,6 +123,14 @@ function renderArchiveTree() {
 
     tree.innerHTML = '';
 
+    const allTimeBtn = document.createElement('button');
+    allTimeBtn.className = 'archive-year';
+    allTimeBtn.textContent = 'All time';
+    allTimeBtn.addEventListener('click', () => {
+        resetToAllPostsView();
+    });
+    tree.appendChild(allTimeBtn);
+
     years.forEach(year => {
         const yearRow = document.createElement('button');
         yearRow.className = 'archive-year';
@@ -161,6 +169,26 @@ function renderArchiveTree() {
         tree.appendChild(yearRow);
         tree.appendChild(monthWrap);
     });
+}
+
+function resetToAllPostsView() {
+    selectedYear = null;
+    selectedMonth = null;
+    selectedTag = null;
+
+    // Ensure default list returns to descending date order.
+    allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    const tagFilterSelect = document.getElementById('tagFilterSelect');
+    if (tagFilterSelect) {
+        tagFilterSelect.value = '';
+    }
+
+    document.querySelectorAll('.archive-months.open').forEach(monthGroup => {
+        monthGroup.classList.remove('open');
+    });
+
+    applyFilters();
 }
 
 function renderTagFilters() {

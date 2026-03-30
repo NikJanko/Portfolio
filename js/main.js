@@ -3,6 +3,9 @@
 // ============================================
 
 let portfolioData = null;
+const MILESTONES_PAGE_SIZE = 1;
+let milestonesPageIndex = 0;
+let sortedMilestones = [];
 
 document.addEventListener('DOMContentLoaded', async function() {
     setupHamburgerMenu();
@@ -87,7 +90,7 @@ function renderDataLoadError() {
     const placeholders = [
         ['intro-container', 'Could not load content.json.'],
         ['education-container', 'Could not load content.json.'],
-        ['awards-container', 'Could not load content.json.'],
+        ['milestones-container', 'Could not load content.json.'],
         ['links-container', 'Could not load content.json.']
     ];
 
@@ -139,22 +142,110 @@ function populateEducation(educationData) {
     educationContainer.innerHTML = html;
 }
 
-function populateAwards(awardsData) {
-    const awardsContainer = document.getElementById('awards-container');
-    
-    const html = awardsData.map(award => `
+function toDateTimestamp(value) {
+    if (!value) {
+        return Number.NEGATIVE_INFINITY;
+    }
+
+    const parsed = Date.parse(value);
+    if (Number.isFinite(parsed)) {
+        return parsed;
+    }
+
+    const year = Number.parseInt(String(value).slice(0, 4), 10);
+    if (Number.isFinite(year) && year > 0) {
+        return Date.UTC(year, 0, 1);
+    }
+
+    return Number.NEGATIVE_INFINITY;
+}
+
+function formatMilestoneDate(dateAwarded) {
+    const parsed = Date.parse(dateAwarded);
+    if (!Number.isFinite(parsed)) {
+        return dateAwarded || 'Unknown date';
+    }
+
+    return new Date(parsed).toLocaleDateString(undefined, {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+    });
+}
+
+function renderMilestonesPage() {
+    const milestonesContainer = document.getElementById('milestones-container');
+    if (!milestonesContainer) {
+        return;
+    }
+
+    const total = sortedMilestones.length;
+    if (!total) {
+        milestonesContainer.innerHTML = '<p>No milestones available yet.</p>';
+        return;
+    }
+
+    const totalPages = Math.ceil(total / MILESTONES_PAGE_SIZE);
+    milestonesPageIndex = Math.max(0, Math.min(milestonesPageIndex, totalPages - 1));
+
+    const start = milestonesPageIndex * MILESTONES_PAGE_SIZE;
+    const end = Math.min(start + MILESTONES_PAGE_SIZE, total);
+    const visibleMilestones = sortedMilestones.slice(start, end);
+    const remaining = Math.max(0, total - end);
+    const progressPercent = Math.round((end / total) * 100);
+
+    const cardsHtml = visibleMilestones.map(milestone => `
         <div class="award-item">
             <div class="award-image">
-                <img src="${award.image}" alt="${award.title}">
+                <img src="${milestone.image}" alt="${milestone.title}">
             </div>
             <div class="award-details">
-                <h4>${award.title}</h4>
-                <p>${award.issuer}</p>
+                <h4>${milestone.title}</h4>
+                <p class="award-meta">${milestone.issuer}</p>
+                <p class="award-date">Awarded ${formatMilestoneDate(milestone.dateAwarded)}</p>
             </div>
         </div>
     `).join('');
-    
-    awardsContainer.innerHTML = html;
+
+    milestonesContainer.innerHTML = `
+        <div class="milestones-carousel">
+            <div class="milestones-cards">${cardsHtml}</div>
+            <div class="milestones-controls" aria-label="Milestones carousel controls">
+                <button type="button" class="milestones-btn" id="milestonesPrev" aria-label="Previous milestones" ${milestonesPageIndex === 0 ? 'disabled' : ''}><span class="triangle-left" aria-hidden="true"></span></button>
+                <div class="milestones-progress-wrap">
+                    <div class="milestones-progress-text">Showing ${start + 1}-${end} of ${total}</div>
+                    <div class="milestones-progress-bar" aria-hidden="true">
+                        <span style="width: ${progressPercent}%;"></span>
+                    </div>
+                        <!--  <div class="milestones-progress-remaining">${remaining} left to view</div> -->
+                </div>
+                <button type="button" class="milestones-btn" id="milestonesNext" aria-label="Next milestones" ${end >= total ? 'disabled' : ''}><span class="triangle-right" aria-hidden="true"></span></button>
+            </div>
+        </div>
+    `;
+
+    const prevButton = document.getElementById('milestonesPrev');
+    const nextButton = document.getElementById('milestonesNext');
+
+    if (prevButton) {
+        prevButton.addEventListener('click', () => {
+            milestonesPageIndex -= 1;
+            renderMilestonesPage();
+        });
+    }
+
+    if (nextButton) {
+        nextButton.addEventListener('click', () => {
+            milestonesPageIndex += 1;
+            renderMilestonesPage();
+        });
+    }
+}
+
+function populateAwards(awardsData) {
+    sortedMilestones = [...(awardsData || [])].sort((a, b) => toDateTimestamp(b.dateAwarded) - toDateTimestamp(a.dateAwarded));
+    milestonesPageIndex = 0;
+    renderMilestonesPage();
 }
 
 function populateSocialLinks(socialLinksData) {
@@ -172,9 +263,9 @@ function populateSocialLinks(socialLinksData) {
 
 function setupMobileExpandableDetails() {
     const isMobileViewport = () => window.matchMedia('(max-width: 768px)').matches;
-    const expandableItems = document.querySelectorAll('.education-item, .award-item');
 
     const collapseAll = (exceptItem = null) => {
+        const expandableItems = document.querySelectorAll('.education-item');
         expandableItems.forEach(item => {
             if (item !== exceptItem) {
                 item.classList.remove('expanded');
@@ -182,25 +273,28 @@ function setupMobileExpandableDetails() {
         });
     };
 
-    expandableItems.forEach(item => {
-        item.addEventListener('click', () => {
-            if (!isMobileViewport()) {
-                return;
-            }
+    document.addEventListener('click', (event) => {
+        if (!isMobileViewport()) {
+            return;
+        }
 
-            const isExpanded = item.classList.contains('expanded');
-            collapseAll(item);
-            if (isExpanded) {
-                item.classList.remove('expanded');
-            } else {
-                item.classList.add('expanded');
-            }
-        });
+        const card = event.target.closest('.education-item');
+        if (!card) {
+            return;
+        }
+
+        const isExpanded = card.classList.contains('expanded');
+        collapseAll(card);
+        if (isExpanded) {
+            card.classList.remove('expanded');
+        } else {
+            card.classList.add('expanded');
+        }
     });
 
     window.addEventListener('resize', () => {
         if (!isMobileViewport()) {
-            expandableItems.forEach(item => item.classList.remove('expanded'));
+            collapseAll();
         }
     });
 }

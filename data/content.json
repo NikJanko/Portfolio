@@ -39,18 +39,21 @@
       "id": 1,
       "title": "Best Developer Award",
       "issuer": "Tech Conference 2023",
+      "dateAwarded": "2023-10-12",
       "image": "https://via.placeholder.com/60x60?text=Award"
     },
     {
       "id": 2,
       "title": "Dean's List Honor",
       "issuer": "University Name 2022",
+      "dateAwarded": "2022-06-20",
       "image": "https://via.placeholder.com/60x60?text=Award"
     },
     {
       "id": 3,
       "title": "Scholarship Excellence",
       "issuer": "Education Board 2020",
+      "dateAwarded": "2020-09-05",
       "image": "https://via.placeholder.com/60x60?text=Award"
     }
   ],

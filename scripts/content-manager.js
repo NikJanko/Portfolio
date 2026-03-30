@@ -31,7 +31,7 @@ function usage() {
     console.log('  node scripts/content-manager.js add <project|award|education|blog> <path-to-json>');
     console.log('  node scripts/content-manager.js delete <project|award|education|blog> <id>');
     console.log('  node scripts/content-manager.js list <project|award|education|blog>');
-    console.log('  node scripts/content-manager.js new-template blog [output-path]');
+    console.log('  node scripts/content-manager.js new-template <blog|award> [output-path]');
     console.log('  node scripts/content-manager.js help');
     process.exit(1);
 }
@@ -41,7 +41,7 @@ function printHelp() {
     console.log('  node scripts/content-manager.js add <project|award|education|blog> <path-to-json>');
     console.log('  node scripts/content-manager.js list <project|award|education|blog>');
     console.log('  node scripts/content-manager.js delete <project|award|education|blog> <id>');
-    console.log('  node scripts/content-manager.js new-template blog [output-path]');
+    console.log('  node scripts/content-manager.js new-template <blog|award> [output-path]');
     console.log('  node scripts/content-manager.js help');
     console.log('');
     console.log('Available npm scripts:');
@@ -59,6 +59,7 @@ function printHelp() {
     console.log('  npm run delete:education -- <id>');
     console.log('  npm run delete:blog -- <id>');
     console.log('  npm run new:blog-template');
+    console.log('  npm run new:award-template');
 }
 
 function toIdString(value) {
@@ -88,11 +89,15 @@ function validateProject(project) {
 }
 
 function validateAward(award) {
-    const required = ['title', 'issuer', 'image'];
+    const required = ['title', 'issuer', 'dateAwarded', 'image'];
     for (const field of required) {
         if (!award[field]) {
             throw new Error(`Award is missing required field: ${field}`);
         }
+    }
+
+    if (Number.isNaN(Date.parse(award.dateAwarded))) {
+        throw new Error('Award field "dateAwarded" must be a valid date (recommended format: YYYY-MM-DD)');
     }
 }
 
@@ -280,6 +285,26 @@ function createBlogTemplate(outputPath) {
     console.log(`Created blog template: ${targetPath}`);
 }
 
+function createAwardTemplate(outputPath) {
+    const date = getTodayDate();
+    const template = {
+        title: 'New Milestone',
+        issuer: 'Award Issuer 2026',
+        dateAwarded: date,
+        image: 'https://example.com/award-image.png'
+    };
+
+    const defaultPath = path.join(ROOT, 'templates', `new-award-${date}.json`);
+    const targetPath = outputPath ? path.resolve(process.cwd(), outputPath) : defaultPath;
+
+    if (fs.existsSync(targetPath)) {
+        throw new Error(`Template already exists: ${targetPath}`);
+    }
+
+    writeJson(targetPath, template);
+    console.log(`Created award template: ${targetPath}`);
+}
+
 function printList(label, items) {
     if (!items.length) {
         console.log(`No ${label} found.`);
@@ -383,11 +408,17 @@ function main() {
     }
 
     if (command === 'new-template') {
-        if (type !== 'blog') {
-            usage();
+        if (type === 'blog') {
+            createBlogTemplate(arg);
+            return;
         }
-        createBlogTemplate(arg);
-        return;
+
+        if (type === 'award') {
+            createAwardTemplate(arg);
+            return;
+        }
+
+        usage();
     }
 
     if (command === 'list') {

@@ -17,6 +17,7 @@
     "delete:award": "node scripts/content-manager.js delete award",
     "delete:education": "node scripts/content-manager.js delete education",
     "delete:blog": "node scripts/content-manager.js delete blog",
-    "new:blog-template": "node scripts/content-manager.js new-template blog"
+    "new:blog-template": "node scripts/content-manager.js new-template blog",
+    "new:award-template": "node scripts/content-manager.js new-template award"
   }
 }
