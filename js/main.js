@@ -21,6 +21,7 @@ async function initializeMainPage() {
     populateEducation(portfolioData.education);
     populateAwards(portfolioData.awards);
     populateSocialLinks(portfolioData.socialLinks);
+    setupMobileExpandableDetails();
     
     // Smooth scroll is handled by CSS scroll-behavior property
     
@@ -167,6 +168,41 @@ function populateSocialLinks(socialLinksData) {
     `).join('');
     
     linksContainer.innerHTML = html;
+}
+
+function setupMobileExpandableDetails() {
+    const isMobileViewport = () => window.matchMedia('(max-width: 768px)').matches;
+    const expandableItems = document.querySelectorAll('.education-item, .award-item');
+
+    const collapseAll = (exceptItem = null) => {
+        expandableItems.forEach(item => {
+            if (item !== exceptItem) {
+                item.classList.remove('expanded');
+            }
+        });
+    };
+
+    expandableItems.forEach(item => {
+        item.addEventListener('click', () => {
+            if (!isMobileViewport()) {
+                return;
+            }
+
+            const isExpanded = item.classList.contains('expanded');
+            collapseAll(item);
+            if (isExpanded) {
+                item.classList.remove('expanded');
+            } else {
+                item.classList.add('expanded');
+            }
+        });
+    });
+
+    window.addEventListener('resize', () => {
+        if (!isMobileViewport()) {
+            expandableItems.forEach(item => item.classList.remove('expanded'));
+        }
+    });
 }
 
 // ============================================

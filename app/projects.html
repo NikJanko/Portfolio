@@ -47,8 +47,8 @@
             <div class="section-title">Projects</div>
         </div>
 
-        <!-- Timeline Bar (Hidden by default) -->
-        <div id="timelineBar" class="timeline-bar hidden">
+        <!-- Timeline Bar -->
+        <div id="timelineBar" class="timeline-bar">
             <div class="timeline-track">
                 <div class="timeline-section dead">
                     <span class="timeline-icon">🦴</span>
@@ -69,21 +69,8 @@
             </div>
         </div>
 
-        <!-- Section Headers with Content (Hidden when timeline is active) -->
-        <div id="sectionHeaders" class="section-headers">
-            <div class="section-header">
-                <h3>Present Projects</h3>
-            </div>
-            <div class="section-header">
-                <h3>Past Projects</h3>
-            </div>
-            <div class="section-header">
-                <h3>Future Projects</h3>
-            </div>
-            <div class="section-header">
-                <h3>Dead Projects</h3>
-            </div>
-        </div>
+        <!-- Section headers are built on-demand in JS when timeline is disabled -->
+        <div id="sectionHeaders" class="section-headers hidden"></div>
 
         <!-- Projects Grid -->
         <div class="projects-grid" id="projectsGrid"></div>
