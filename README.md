@@ -33,7 +33,8 @@ portfolio/
 │   ├── new-award.json
 │   ├── new-education.json
 │   └── new-blog-post.json
-├── alt-Images/
+├── Images/
+├── icons/
 ├── photos/
 ├── projects/
 ├── package.json
