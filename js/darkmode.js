@@ -6,6 +6,10 @@ class DarkModeManager {
     constructor() {
         this.darkModeClass = 'dark-mode';
         this.storageKey = 'portfolioDarkMode';
+        this.transitionClass = 'theme-transition';
+        this.transitionDurationMs = 500;
+        this.transitionTimer = null;
+        this.pullTimer = null;
         this.init();
     }
 
@@ -33,11 +37,7 @@ class DarkModeManager {
             const isDarkMode = localStorage.getItem(this.storageKey) === 'true';
             toggle.checked = isDarkMode;
             toggle.addEventListener('change', (e) => {
-                if (e.target.checked) {
-                    this.enableDarkMode();
-                } else {
-                    this.disableDarkMode();
-                }
+                this.applyTheme(e.target.checked);
             });
         }
     }
@@ -50,38 +50,63 @@ class DarkModeManager {
     }
 
     enableDarkMode() {
-        document.documentElement.classList.add(this.darkModeClass);
-        const toggle = document.getElementById('darkModeToggle');
-        if (toggle) {
-            toggle.checked = true;
-        }
-        const emoji = document.getElementById('darkModeEmoji');
-        if (emoji) {
-            emoji.textContent = '🌙';
-            this.triggerEmojiAnimation(emoji);
-        }
-        localStorage.setItem(this.storageKey, 'true');
+        this.applyTheme(true);
     }
 
     disableDarkMode() {
-        document.documentElement.classList.remove(this.darkModeClass);
-        const toggle = document.getElementById('darkModeToggle');
-        if (toggle) {
-            toggle.checked = false;
-        }
-        const emoji = document.getElementById('darkModeEmoji');
-        if (emoji) {
-            emoji.textContent = '☀️';
-            this.triggerEmojiAnimation(emoji);
-        }
-        localStorage.setItem(this.storageKey, 'false');
+        this.applyTheme(false);
     }
 
-    triggerEmojiAnimation(emoji) {
-        emoji.style.animation = 'none';
-        // Trigger reflow to restart animation
+    applyTheme(isDarkMode) {
+        this.startThemeTransition();
+
+        if (isDarkMode) {
+            document.documentElement.classList.add(this.darkModeClass);
+        } else {
+            document.documentElement.classList.remove(this.darkModeClass);
+        }
+
+        const toggle = document.getElementById('darkModeToggle');
+        if (toggle) {
+            toggle.checked = isDarkMode;
+        }
+
+        const emoji = document.getElementById('darkModeEmoji');
+        if (emoji) {
+            emoji.textContent = isDarkMode ? '🌙' : '☀️';
+            this.triggerPullAnimation(emoji);
+        }
+
+        localStorage.setItem(this.storageKey, String(isDarkMode));
+    }
+
+    startThemeTransition() {
+        const root = document.documentElement;
+        root.classList.add(this.transitionClass);
+
+        if (this.transitionTimer) {
+            clearTimeout(this.transitionTimer);
+        }
+
+        this.transitionTimer = setTimeout(() => {
+            root.classList.remove(this.transitionClass);
+            this.transitionTimer = null;
+        }, this.transitionDurationMs);
+    }
+
+    triggerPullAnimation(emoji) {
+        emoji.classList.remove('is-pulled');
         void emoji.offsetWidth;
-        emoji.style.animation = 'emojiToggle 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards';
+        emoji.classList.add('is-pulled');
+
+        if (this.pullTimer) {
+            clearTimeout(this.pullTimer);
+        }
+
+        this.pullTimer = setTimeout(() => {
+            emoji.classList.remove('is-pulled');
+            this.pullTimer = null;
+        }, 520);
     }
 
     toggle() {

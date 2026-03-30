@@ -18,23 +18,24 @@ async function initializeProjectsPage() {
     setupToggle();
     setupTimeline();
     setupModal();
+
+    // Projects page should land in timeline mode by default.
+    const timelineToggle = document.getElementById('timelineToggle');
+    timelineToggle.checked = true;
+    timelineEnabled = true;
+    toggleTimeline();
     
     // Check URL parameters for filter
     const urlParams = new URLSearchParams(window.location.search);
     const filter = urlParams.get('filter');
     if (filter && ['dead', 'past', 'current', 'present', 'future'].includes(filter)) {
         currentFilter = filter === 'current' ? 'present' : filter;
-        // Enable timeline and set appropriate position
-        document.getElementById('timelineToggle').checked = true;
-        toggleTimeline();
-        
+
         // Set slider position based on filter
         const normalizedFilter = filter === 'current' ? 'present' : filter;
         const indexMap = { dead: 0, past: 1, present: 2, future: 3 };
         selectedTimelineIndex = indexMap[normalizedFilter];
         updateTimelineFilter(selectedTimelineIndex);
-    } else {
-        renderProjects('all');
     }
 }
 
