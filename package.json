@@ -5,6 +5,11 @@
   "description": "Utility scripts for managing portfolio JSON content",
   "scripts": {
     "help": "node scripts/content-manager.js help",
+    "new:project": "node scripts/content-manager.js add project",
+    "new:award": "node scripts/content-manager.js add award",
+    "new:education": "node scripts/content-manager.js add education",
+    "new:blog": "node scripts/content-manager.js add blog",
+    "new:project-template": "node scripts/content-manager.js new project",
     "add:project": "node scripts/content-manager.js add project",
     "add:award": "node scripts/content-manager.js add award",
     "add:education": "node scripts/content-manager.js add education",
@@ -18,6 +23,7 @@
     "delete:education": "node scripts/content-manager.js delete education",
     "delete:blog": "node scripts/content-manager.js delete blog",
     "new:blog-template": "node scripts/content-manager.js new-template blog",
-    "new:award-template": "node scripts/content-manager.js new-template award"
+    "new:award-template": "node scripts/content-manager.js new-template award",
+    "new:education-template": "node scripts/content-manager.js new-template education"
   }
 }

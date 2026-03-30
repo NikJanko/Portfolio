@@ -114,7 +114,10 @@ function populateIntro(introData) {
             <img src="${introData.profileImage}" alt="Profile Picture">
         </div>
         <div class="intro-subsection intro-text">
-            <p>${introData.description}</p>
+            <div class="intro-quote">
+                <p class="intro-quote-text">${introData.description}</p>
+                <p class="intro-signature">- ${introData.name}</p>
+            </div>
         </div>
     `;
     
@@ -146,9 +149,9 @@ function toDateTimestamp(value) {
         return Number.NEGATIVE_INFINITY;
     }
 
-    const parsed = Date.parse(value);
-    if (Number.isFinite(parsed)) {
-        return parsed;
+    const parsedDate = parseDateValue(value);
+    if (parsedDate) {
+        return parsedDate.getTime();
     }
 
     const year = Number.parseInt(String(value).slice(0, 4), 10);
@@ -159,13 +162,44 @@ function toDateTimestamp(value) {
     return Number.NEGATIVE_INFINITY;
 }
 
-function formatMilestoneDate(dateAwarded) {
-    const parsed = Date.parse(dateAwarded);
+function parseDateValue(value) {
+    const normalized = String(value || '').trim();
+    if (!normalized) {
+        return null;
+    }
+
+    const dateOnlyMatch = normalized.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (dateOnlyMatch) {
+        const year = Number.parseInt(dateOnlyMatch[1], 10);
+        const month = Number.parseInt(dateOnlyMatch[2], 10);
+        const day = Number.parseInt(dateOnlyMatch[3], 10);
+        const localDate = new Date(year, month - 1, day);
+
+        if (
+            localDate.getFullYear() === year &&
+            localDate.getMonth() === month - 1 &&
+            localDate.getDate() === day
+        ) {
+            return localDate;
+        }
+        return null;
+    }
+
+    const parsed = Date.parse(normalized);
     if (!Number.isFinite(parsed)) {
+        return null;
+    }
+
+    return new Date(parsed);
+}
+
+function formatMilestoneDate(dateAwarded) {
+    const parsedDate = parseDateValue(dateAwarded);
+    if (!parsedDate) {
         return dateAwarded || 'Unknown date';
     }
 
-    return new Date(parsed).toLocaleDateString(undefined, {
+    return parsedDate.toLocaleDateString(undefined, {
         year: 'numeric',
         month: 'short',
         day: 'numeric'
@@ -253,7 +287,6 @@ function populateSocialLinks(socialLinksData) {
     const html = socialLinksData.map(link => `
         <a href="${link.url}" class="media-link" target="_blank" rel="noopener noreferrer">
             <img src="${link.image}" alt="${link.platform}">
-            <span>${link.platform}</span>
         </a>
     `).join('');
     

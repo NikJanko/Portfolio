@@ -6,6 +6,12 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const CONTENT_PATH = path.join(ROOT, 'data', 'content.json');
 const BLOG_PATH = path.join(ROOT, 'data', 'blog-data.json');
+const DEFAULT_TEMPLATE_NAMES = {
+    project: 'p.json',
+    award: 'a.json',
+    education: 'e.json',
+    blog: 'b.json'
+};
 
 function readJson(filePath) {
     return JSON.parse(fs.readFileSync(filePath, 'utf8'));
@@ -21,6 +27,16 @@ function isTemplatePayload(filePath) {
     return normalizedPath.startsWith(templatesDir) && normalizedPath.endsWith('.json');
 }
 
+function shouldDeleteTemplatePayload(filePath) {
+    if (!isTemplatePayload(filePath)) {
+        return false;
+    }
+
+    const shortTemplateNames = new Set(Object.values(DEFAULT_TEMPLATE_NAMES));
+    const fileName = path.basename(filePath);
+    return !shortTemplateNames.has(fileName);
+}
+
 function nextNumericId(items) {
     const ids = items.map(item => Number(item.id)).filter(Number.isFinite);
     return ids.length ? Math.max(...ids) + 1 : 1;
@@ -28,24 +44,40 @@ function nextNumericId(items) {
 
 function usage() {
     console.log('Usage:');
-    console.log('  node scripts/content-manager.js add <project|award|education|blog> <path-to-json>');
+    console.log('  node scripts/content-manager.js add <project|award|education|blog> [path-to-json]');
     console.log('  node scripts/content-manager.js delete <project|award|education|blog> <id>');
     console.log('  node scripts/content-manager.js list <project|award|education|blog>');
-    console.log('  node scripts/content-manager.js new-template <blog|award> [output-path]');
+    console.log('  node scripts/content-manager.js new <project|award|education|blog> [output-path]');
+    console.log('  node scripts/content-manager.js new-template <project|award|education|blog> [output-path]');
     console.log('  node scripts/content-manager.js help');
     process.exit(1);
 }
 
 function printHelp() {
     console.log('Available direct commands:');
-    console.log('  node scripts/content-manager.js add <project|award|education|blog> <path-to-json>');
+    console.log('  node scripts/content-manager.js add <project|award|education|blog> [path-to-json]');
     console.log('  node scripts/content-manager.js list <project|award|education|blog>');
     console.log('  node scripts/content-manager.js delete <project|award|education|blog> <id>');
-    console.log('  node scripts/content-manager.js new-template <blog|award> [output-path]');
+    console.log('  node scripts/content-manager.js new <project|award|education|blog> [output-path]');
+    console.log('  node scripts/content-manager.js new-template <project|award|education|blog> [output-path]');
     console.log('  node scripts/content-manager.js help');
+    console.log('');
+    console.log('Default short template names:');
+    console.log('  project -> templates/p.json');
+    console.log('  award -> templates/a.json');
+    console.log('  education -> templates/e.json');
+    console.log('  blog -> templates/b.json');
     console.log('');
     console.log('Available npm scripts:');
     console.log('  npm run help');
+    console.log('  npm run new:project            # add from templates/p.json');
+    console.log('  npm run new:award              # add from templates/a.json');
+    console.log('  npm run new:education          # add from templates/e.json');
+    console.log('  npm run new:blog               # add from templates/b.json');
+    console.log('  npm run new:project-template   # create templates/p.json if needed');
+    console.log('  npm run new:award-template');
+    console.log('  npm run new:education-template');
+    console.log('  npm run new:blog-template');
     console.log('  npm run add:project -- <path-to-json>');
     console.log('  npm run add:award -- <path-to-json>');
     console.log('  npm run add:education -- <path-to-json>');
@@ -58,8 +90,6 @@ function printHelp() {
     console.log('  npm run delete:award -- <id>');
     console.log('  npm run delete:education -- <id>');
     console.log('  npm run delete:blog -- <id>');
-    console.log('  npm run new:blog-template');
-    console.log('  npm run new:award-template');
 }
 
 function toIdString(value) {
@@ -255,6 +285,41 @@ function generateBlogId(blogPosts, date) {
     }
 }
 
+function resolveTemplatePath(type, outputPath) {
+    if (outputPath) {
+        return path.resolve(process.cwd(), outputPath);
+    }
+
+    const shortName = DEFAULT_TEMPLATE_NAMES[type];
+    if (!shortName) {
+        throw new Error(`Unsupported template type: ${type}`);
+    }
+
+    return path.join(ROOT, 'templates', shortName);
+}
+
+function createProjectTemplate(outputPath) {
+    const template = {
+        type: 'present',
+        title: 'New Project Title',
+        image: 'https://example.com/project-image.png',
+        summary: 'Full project summary used in the expanded project view.',
+        cardSummary: 'Short summary shown on the minimized project card.',
+        challenges: 'Main implementation challenges and tradeoffs.',
+        tools: ['Tool A', 'Tool B'],
+        link: 'https://example.com/project-link'
+    };
+
+    const targetPath = resolveTemplatePath('project', outputPath);
+
+    if (fs.existsSync(targetPath)) {
+        throw new Error(`Template already exists: ${targetPath}`);
+    }
+
+    writeJson(targetPath, template);
+    console.log(`Created project template: ${targetPath}`);
+}
+
 function createBlogTemplate(outputPath) {
     const date = getTodayDate();
     const template = {
@@ -274,8 +339,7 @@ function createBlogTemplate(outputPath) {
         linkedinPostUrl: ''
     };
 
-    const defaultPath = path.join(ROOT, 'templates', `new-blog-post-${date}.json`);
-    const targetPath = outputPath ? path.resolve(process.cwd(), outputPath) : defaultPath;
+    const targetPath = resolveTemplatePath('blog', outputPath);
 
     if (fs.existsSync(targetPath)) {
         throw new Error(`Template already exists: ${targetPath}`);
@@ -294,8 +358,7 @@ function createAwardTemplate(outputPath) {
         image: 'https://example.com/award-image.png'
     };
 
-    const defaultPath = path.join(ROOT, 'templates', `new-award-${date}.json`);
-    const targetPath = outputPath ? path.resolve(process.cwd(), outputPath) : defaultPath;
+    const targetPath = resolveTemplatePath('award', outputPath);
 
     if (fs.existsSync(targetPath)) {
         throw new Error(`Template already exists: ${targetPath}`);
@@ -303,6 +366,26 @@ function createAwardTemplate(outputPath) {
 
     writeJson(targetPath, template);
     console.log(`Created award template: ${targetPath}`);
+}
+
+function createEducationTemplate(outputPath) {
+    const template = {
+        title: 'Bachelor of Science (BSc)',
+        subject: 'Computer Science',
+        institution: 'University Name',
+        duration: '2022 - 2026',
+        image: 'https://example.com/school-image.png',
+        coursework: ['Course 1', 'Course 2']
+    };
+
+    const targetPath = resolveTemplatePath('education', outputPath);
+
+    if (fs.existsSync(targetPath)) {
+        throw new Error(`Template already exists: ${targetPath}`);
+    }
+
+    writeJson(targetPath, template);
+    console.log(`Created education template: ${targetPath}`);
 }
 
 function printList(label, items) {
@@ -359,11 +442,12 @@ function main() {
     }
 
     if (command === 'add') {
-        if (!type || !arg) {
+        if (!type) {
             usage();
         }
 
-        const resolvedPayloadPath = path.resolve(process.cwd(), arg);
+        const payloadPath = arg || resolveTemplatePath(type);
+        const resolvedPayloadPath = path.resolve(process.cwd(), payloadPath);
         if (!fs.existsSync(resolvedPayloadPath)) {
             throw new Error(`Payload file does not exist: ${resolvedPayloadPath}`);
         }
@@ -380,7 +464,7 @@ function main() {
             usage();
         }
 
-        if (isTemplatePayload(resolvedPayloadPath)) {
+        if (shouldDeleteTemplatePayload(resolvedPayloadPath)) {
             fs.unlinkSync(resolvedPayloadPath);
             console.log(`Deleted template file: ${resolvedPayloadPath}`);
         }
@@ -407,7 +491,12 @@ function main() {
         return;
     }
 
-    if (command === 'new-template') {
+    if (command === 'new' || command === 'new-template') {
+        if (type === 'project') {
+            createProjectTemplate(arg);
+            return;
+        }
+
         if (type === 'blog') {
             createBlogTemplate(arg);
             return;
@@ -415,6 +504,11 @@ function main() {
 
         if (type === 'award') {
             createAwardTemplate(arg);
+            return;
+        }
+
+        if (type === 'education') {
+            createEducationTemplate(arg);
             return;
         }
 

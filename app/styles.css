@@ -359,6 +359,10 @@ body {
 .intro-image img {
     width: 100%;
     max-width: 300px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center;
+    display: block;
     border-radius: 10px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
@@ -373,6 +377,46 @@ body {
     font-size: 1.1rem;
     line-height: 1.8;
     color: var(--text-secondary);
+}
+
+.intro-quote {
+    position: relative;
+    padding: 1.9rem 1.4rem 1rem;
+}
+
+.intro-quote::before,
+.intro-quote::after {
+    position: absolute;
+    font-size: clamp(4rem, 9vw, 7rem);
+    line-height: 1;
+    color: rgba(63, 126, 88, 0.16);
+    font-weight: 700;
+    pointer-events: none;
+}
+
+.intro-quote::before {
+    content: "\201C";
+    top: -1.45rem;
+    left: -1.05rem;
+}
+
+.intro-quote::after {
+    content: "\201D";
+    right: -0.8rem;
+    bottom: -3rem;
+}
+
+.intro-quote-text {
+    position: relative;
+    z-index: 1;
+}
+
+.intro-signature {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+    color: var(--color-1);
+    font-weight: 600;
 }
 
 /* ============================================
@@ -1191,6 +1235,15 @@ body {
     color: #b0b0b0;
 }
 
+:root.dark-mode .intro-quote::before,
+:root.dark-mode .intro-quote::after {
+    color: rgba(167, 224, 178, 0.2);
+}
+
+:root.dark-mode .intro-signature {
+    color: #c7eacb;
+}
+
 :root.dark-mode .education-item {
     background: #2d2d2d;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
@@ -1684,6 +1737,19 @@ body {
         max-width: 250px;
     }
 
+    .intro-quote {
+        padding: 1.55rem 1rem 0.75rem;
+    }
+
+    .intro-quote::before,
+    .intro-quote::after {
+        font-size: clamp(3.25rem, 14vw, 5.5rem);
+    }
+
+    .intro-signature {
+        font-size: 0.85rem;
+    }
+
     .intro-text h2 {
         font-size: 1.3rem;
         margin-bottom: 1rem;
@@ -1983,6 +2049,15 @@ body {
 
     .intro-image img {
         max-width: 200px;
+    }
+
+    .intro-quote {
+        padding: 1.35rem 0.8rem 0.5rem;
+    }
+
+    .intro-signature {
+        margin-top: 0.8rem;
+        font-size: 0.8rem;
     }
 
     .intro-text h2 {

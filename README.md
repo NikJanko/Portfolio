@@ -115,11 +115,18 @@ node scripts/content-manager.js help
 ### Add Entries
 
 ```bash
-node scripts/content-manager.js add project <path-to-json>
-node scripts/content-manager.js add award <path-to-json>
-node scripts/content-manager.js add education <path-to-json>
-node scripts/content-manager.js add blog <path-to-json>
+node scripts/content-manager.js add project [path-to-json]
+node scripts/content-manager.js add award [path-to-json]
+node scripts/content-manager.js add education [path-to-json]
+node scripts/content-manager.js add blog [path-to-json]
 ```
+
+If `path-to-json` is omitted, the command uses the active short template in `templates/`:
+
+- `project` -> `templates/p.json`
+- `award` -> `templates/a.json`
+- `education` -> `templates/e.json`
+- `blog` -> `templates/b.json`
 
 ### List Entries
 
@@ -142,9 +149,18 @@ node scripts/content-manager.js delete blog <id>
 ### Generate Templates
 
 ```bash
+node scripts/content-manager.js new project
+node scripts/content-manager.js new education
 node scripts/content-manager.js new-template blog
 node scripts/content-manager.js new-template award
 ```
+
+Default short template outputs:
+
+- `project` -> `templates/p.json`
+- `award` -> `templates/a.json`
+- `education` -> `templates/e.json`
+- `blog` -> `templates/b.json`
 
 Optional custom output paths:
 
@@ -157,6 +173,15 @@ node scripts/content-manager.js new-template award templates/my-milestone-draft.
 
 ```bash
 npm run help
+
+npm run new:project
+npm run new:award
+npm run new:education
+npm run new:blog
+npm run new:project-template
+npm run new:education-template
+npm run new:blog-template
+npm run new:award-template
 
 npm run add:project -- <path-to-json>
 npm run add:award -- <path-to-json>
@@ -172,14 +197,12 @@ npm run delete:project -- <id>
 npm run delete:award -- <id>
 npm run delete:education -- <id>
 npm run delete:blog -- <id>
-
-npm run new:blog-template
-npm run new:award-template
 ```
 
 ## Notes
 
 - IDs are auto-generated when omitted for supported content types.
 - Blog posts are sorted by date descending in the UI.
-- Adding from a JSON file inside `templates/` deletes that template file after successful add.
+- Adding from reusable short templates (`templates/p.json`, `templates/a.json`, `templates/e.json`, `templates/b.json`) keeps the file.
+- Adding from other JSON files inside `templates/` deletes that template file after successful add.
 - Node.js is required for CLI/npm commands.
