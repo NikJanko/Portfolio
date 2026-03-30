@@ -1,13 +1,13 @@
 {
   "type": "present",
-  "title": "New Project Title",
+  "title": "New_Project_Title",
   "image": "https://example.com/project-image.png",
-  "summary": "Full project summary used in the expanded project view.",
-  "cardSummary": "Short summary shown on the minimized project card.",
-  "challenges": "Main implementation challenges and tradeoffs.",
+  "summary": "Full_project_summary_used_in_the_expanded_project_view.",
+  "cardSummary": "Short_summary_shown_on_the_minimized_project_card.",
+  "challenges": "Main_implementation_challenges_and_tradeoffs.",
   "tools": [
-    "Tool A",
-    "Tool B"
+    "Tool_A",
+    "Tool_B"
   ],
   "link": "https://example.com/project-link"
 }
