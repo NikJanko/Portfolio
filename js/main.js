@@ -3,7 +3,7 @@
 // ============================================
 
 let portfolioData = null;
-const MILESTONES_PAGE_SIZE = 1;
+const MILESTONES_PAGE_SIZE = 3;
 let milestonesPageIndex = 0;
 let sortedMilestones = [];
 
@@ -114,7 +114,6 @@ function populateIntro(introData) {
             <img src="${introData.profileImage}" alt="Profile Picture">
         </div>
         <div class="intro-subsection intro-text">
-            <h2>Welcome to My Portfolio</h2>
             <p>${introData.description}</p>
         </div>
     `;
@@ -265,7 +264,7 @@ function setupMobileExpandableDetails() {
     const isMobileViewport = () => window.matchMedia('(max-width: 768px)').matches;
 
     const collapseAll = (exceptItem = null) => {
-        const expandableItems = document.querySelectorAll('.education-item');
+        const expandableItems = document.querySelectorAll('.education-item, .award-item');
         expandableItems.forEach(item => {
             if (item !== exceptItem) {
                 item.classList.remove('expanded');
@@ -278,7 +277,7 @@ function setupMobileExpandableDetails() {
             return;
         }
 
-        const card = event.target.closest('.education-item');
+        const card = event.target.closest('.education-item, .award-item');
         if (!card) {
             return;
         }
