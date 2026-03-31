@@ -113,6 +113,8 @@ body {
 /* ============================================
    NAVIGATION
    ============================================ */
+
+/* ---- Navbar Container ---- */
 .navbar {
     background: linear-gradient(135deg, var(--color-1) 0%, var(--color-2) 100%);
     padding: 0.75rem 0;
@@ -205,19 +207,30 @@ body {
     transform: rotate(-45deg) translate(7px, -7px);
 }
 
-/* Dark Mode Toggle */
+/* ---- Dark Mode Toggle ---- */
 .dark-mode-toggle {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
     cursor: pointer;
     order: 3;
     flex-shrink: 0;
     margin-left: 0.75rem;
     position: relative;
+    overflow: visible;
 }
 
 .dark-mode-input {
     display: none;
+}
+
+.dark-mode-string {
+    width: 2px;
+    height: 2.0rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.62);
+    flex: none;
 }
 
 .dark-mode-emoji {
@@ -231,6 +244,8 @@ body {
     color: transparent;
     font-size: 0;
     top: 0;
+    margin-top: -1rem;
+    margin-bottom: .2rem;
     transform-origin: center -20px;
     background: radial-gradient(circle at 30% 28%, #fff8d2 0%, #f3de99 58%, #d9b85f 100%);
     box-shadow: 0 0 8px rgba(255, 211, 97, 0.28);
@@ -242,18 +257,6 @@ body {
 .dark-mode-emoji.is-pulled {
     /* Pull-switch effect distance */
     top: 10px;
-}
-
-.dark-mode-emoji::before {
-    content: '';
-    position: absolute;
-    top: -26px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 2px;
-    height: 26px;
-    border-radius: 2px;
-    background: rgba(255, 255, 255, 0.62);
 }
 
 .dark-mode-emoji::after {
@@ -282,6 +285,8 @@ body {
 /* ============================================
    SECTIONS
    ============================================ */
+
+/* ---- Base Section Styles ---- */
 .section {
     /* Desktop content width: increase/decrease this to change global page breadth */
     max-width: 1272px;
@@ -343,6 +348,8 @@ body {
 /* ============================================
    INTRO SECTION
    ============================================ */
+
+/* ---- Intro Container Layout ---- */
 .intro-container {
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -422,6 +429,8 @@ body {
 /* ============================================
    EDUCATION SECTION
    ============================================ */
+
+/* ---- Education Container ---- */
 .education-container {
     display: flex;
     flex-direction: column;
@@ -465,6 +474,8 @@ body {
 /* ============================================
    AWARDS SECTION
    ============================================ */
+
+/* ---- Milestones Carousel ---- */
 .awards-container {
     display: flex;
     flex-direction: column;
@@ -581,6 +592,8 @@ body {
 /* ============================================
    PROJECTS SECTION (MAIN PAGE)
    ============================================ */
+
+/* ---- Projects Intro & Links ---- */
 .projects-intro {
     background: white;
     padding: 2rem;
@@ -627,6 +640,8 @@ body {
 /* ============================================
    LINKS SECTION
    ============================================ */
+
+/* ---- Social Links Container ---- */
 .links-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(88px, 88px));
@@ -683,6 +698,8 @@ body {
 /* ============================================
    PROJECTS PAGE STYLES
    ============================================ */
+
+/* ---- Projects Page Layout ---- */
 .projects-page {
     padding: 2rem;
     min-height: auto;
@@ -1639,17 +1656,19 @@ body {
     .dark-mode-emoji {
         width: 2.1rem;
         height: 2.1rem;
+        margin-top: -1.8rem;
+        margin-bottom: .2rem;
+
         transform-origin: center -16px;
     }
 
-    .dark-mode-emoji::before {
-        top: -16px;
-        height: 16px;
+    .dark-mode-string {
+        height: 3rem;
     }
 
     .dark-mode-emoji::after {
-        font-size: 0.6rem;
-        letter-spacing: 0.05rem;
+        font-size: 1rem;
+        /* letter-spacing: 0.05rem; */
     }
 
     .dark-mode-input {
@@ -2021,16 +2040,17 @@ body {
     .dark-mode-emoji {
         width: 1.8rem;
         height: 1.8rem;
+        margin-top: -1.6rem;
+        margin-bottom: .2rem;
         transform-origin: center -14px;
     }
 
-    .dark-mode-emoji::before {
-        top: -14px;
-        height: 14px;
+    .dark-mode-string {
+        height: 3rem;
     }
 
     .dark-mode-emoji::after {
-        font-size: 0.52rem;
+        font-size: 0.9rem;
     }
 
     .section {
