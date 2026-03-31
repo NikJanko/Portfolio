@@ -141,7 +141,7 @@ function validateEducation(education) {
 }
 
 function validateBlog(post) {
-    const required = ['title', 'date', 'author', 'tags', 'summary', 'content', 'externalLinks', 'images'];
+    const required = ['title', 'date', 'author', 'tags', 'categories', 'summary', 'content', 'externalLinks', 'images'];
     for (const field of required) {
         if (post[field] === undefined || post[field] === null) {
             throw new Error(`Blog post is missing required field: ${field}`);
@@ -149,6 +149,9 @@ function validateBlog(post) {
     }
     if (!Array.isArray(post.tags)) {
         throw new Error('Blog field "tags" must be an array');
+    }
+    if (!Array.isArray(post.categories)) {
+        throw new Error('Blog field "categories" must be an array');
     }
     if (!Array.isArray(post.content)) {
         throw new Error('Blog field "content" must be an array');

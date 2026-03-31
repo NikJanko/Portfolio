@@ -6,6 +6,9 @@
     "tag1",
     "tag2"
   ],
+  "categories": [
+    "Casual"
+  ],
   "summary": "Short_summary_for_the_card_preview.",
   "content": [
     "Paragraph_1",

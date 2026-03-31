@@ -38,8 +38,8 @@
             <h2 class="section-title">Blog</h2>
             <button id="archiveToggle" class="archive-toggle">☰ Archive</button>
         </div>
-
-        <p class="blog-note">LinkedIn auto-post sync: this page supports storing your LinkedIn post URLs in the JSON data. Full automatic import requires LinkedIn API access and authentication.</p>
+        <hr class="blog-note">
+        <!-- <p class="blog-note">LinkedIn auto-post sync: this page supports storing your LinkedIn post URLs in the JSON data. Full automatic import requires LinkedIn API access and authentication.</p> -->
 
         <div class="blog-layout">
             <aside id="blogSidebar" class="blog-sidebar">
@@ -51,8 +51,25 @@
 
             <main class="blog-main">
                 <div class="tags-filter-wrap">
-                    <span class="tags-filter-label">Filter by tag:</span>
+                    <span class="tags-filter-label">Filter by Tag:</span>
                     <select id="tagFilterSelect" class="tag-filter-select" aria-label="Filter posts by tag"></select>
+                </div>
+
+                <div class="tags-filter-wrap">
+                    <span class="tags-filter-label">Categories:</span>
+                    <div id="categoryDropdown" class="category-dropdown">
+                        <button
+                            id="categoryDropdownBtn"
+                            type="button"
+                            class="tag-filter-select category-dropdown-btn"
+                            aria-label="Filter posts by category"
+                            aria-haspopup="listbox"
+                            aria-expanded="false"
+                        >
+                            Select categories
+                        </button>
+                        <div id="categoryDropdownMenu" class="category-dropdown-menu hidden" role="listbox" aria-multiselectable="true"></div>
+                    </div>
                 </div>
 
                 <div id="blogCards" class="blog-cards"></div>

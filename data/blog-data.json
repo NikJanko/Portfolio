@@ -1,1 +1,33 @@
-[]
+[
+  {
+    "title": "Done Website Development",
+    "date": "2026-03-29",
+    "author": "Nikola Jankovic",
+    "tags": [
+      "Frontend",
+      "Website Development",
+      "Personal Project",
+      "Checkpoint",
+      "HTML",
+      "CSS",
+      "JavaScript/JS"
+    ],
+    "categories": [
+      "Personal Project"
+    ],
+    "summary": "Update on the progress of the website: Checkpoint 1 - website development phase finished.<br>I am working on transferring content from my past works to this blog section.",
+    "content": [
+      "Today marks an exciting milestone! I have finished a good portion of the website development. The website shouldn't see any huge changes for a while. I am now focusing on transferring all my previous projects, information, and other content to the website. I am also working on retroactively adding blog posts regarding my past projects and events (such as linked in). So please bare with me as a continue to both learn and improve the website!",
+      "For now, please enjoy the screenshots of the development process, and the this sick canvas animation! This animation is on every post, to fill the empty space for smaller posts. There is also an easter egg, can you find the secret in the animation?"
+    ],
+    "externalLinks": [
+      {}
+    ],
+    "images": [
+      "../images/blog-posts/checkpoints/site.png",
+      "../images/blog-posts/checkpoints/code.png"
+    ],
+    "linkedinPostUrl": "",
+    "id": "post-20260329-01"
+  }
+]
