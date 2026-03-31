@@ -1,0 +1,139 @@
+// {
+    //   "type": "present",
+    //   "title": "Undergraduate Research Project",
+    //   "image": "https://example.com/project-image.png",
+    //   "summary": "temp",
+    //   "cardSummary": "temp.",
+    //   "challenges": "temp",
+    //   "tools": [
+    //     "temp"
+    //   ],
+    //   "link": "https://example.com/project-link",
+    //   "id": 1
+    // },
+    // {
+    //   "type": "present",
+    //   "title": "First Year Problem Sets",
+    //   "image": "https://example.com/project-image.png",
+    //   "summary": "Full project summary used in the expanded project view.",
+    //   "cardSummary": "Short summary shown on the minimized project card.",
+    //   "challenges": "Main implementation challenges and tradeoffs.",
+    //   "tools": [
+    //     "Tool A",
+    //     "Tool B"
+    //   ],
+    //   "link": "https://example.com/project-link",
+    //   "id": 2
+    // },
+    // {
+    //   "type": "present",
+    //   "title": "Portfolio Website",
+    //   "image": "https://example.com/project-image.png",
+    //   "summary": "Full project summary used in the expanded project view.",
+    //   "cardSummary": "Short summary shown on the minimized project card.",
+    //   "challenges": "Main implementation challenges and tradeoffs.",
+    //   "tools": [
+    //     "Tool A",
+    //     "Tool B"
+    //   ],
+    //   "link": "https://example.com/project-link",
+    //   "id": 3
+    // },
+    // {
+    //   "type": "present",
+    //   "title": "Code Plagiarism Software",
+    //   "image": "https://example.com/project-image.png",
+    //   "summary": "Full project summary used in the expanded project view.",
+    //   "cardSummary": "Short summary shown on the minimized project card.",
+    //   "challenges": "Main implementation challenges and tradeoffs.",
+    //   "tools": [
+    //     "Tool A",
+    //     "Tool B"
+    //   ],
+    //   "link": "https://example.com/project-link",
+    //   "id": 4
+    // },
+    // {
+    //   "type": "present",
+    //   "title": "Git Hub portfolio",
+    //   "image": "https://example.com/project-image.png",
+    //   "summary": "Full project summary used in the expanded project view.",
+    //   "cardSummary": "Short summary shown on the minimized project card.",
+    //   "challenges": "Main implementation challenges and tradeoffs.",
+    //   "tools": [
+    //     "Tool A",
+    //     "Tool B"
+    //   ],
+    //   "link": "https://example.com/project-link",
+    //   "id": 5
+    // },
+    // {
+    //   "type": "present",
+    //   "title": "Major Repo AI (Temp holding repo)",
+    //   "image": "https://example.com/project-image.png",
+    //   "summary": "Full project summary used in the expanded project view.",
+    //   "cardSummary": "Short summary shown on the minimized project card.",
+    //   "challenges": "Main implementation challenges and tradeoffs.",
+    //   "tools": [
+    //     "Tool A",
+    //     "Tool B"
+    //   ],
+    //   "link": "https://example.com/project-link",
+    //   "id": 6
+    // },
+    // {
+    //   "type": "present",
+    //   "title": "Knights Tour",
+    //   "image": "https://example.com/project-image.png",
+    //   "summary": "Full project summary used in the expanded project view.",
+    //   "cardSummary": "Short summary shown on the minimized project card.",
+    //   "challenges": "Main implementation challenges and tradeoffs.",
+    //   "tools": [
+    //     "Tool A",
+    //     "Tool B"
+    //   ],
+    //   "link": "https://example.com/project-link",
+    //   "id": 7
+    // },
+    // {
+    //   "type": "present",
+    //   "title": "PDF to Audio Converter",
+    //   "image": "https://example.com/project-image.png",
+    //   "summary": "Full project summary used in the expanded project view.",
+    //   "cardSummary": "Short summary shown on the minimized project card.",
+    //   "challenges": "Main implementation challenges and tradeoffs.",
+    //   "tools": [
+    //     "Tool A",
+    //     "Tool B"
+    //   ],
+    //   "link": "https://example.com/project-link",
+    //   "id": 8
+    // },
+    // {
+    //   "type": "present",
+    //   "title": "GameSideProject",
+    //   "image": "https://example.com/project-image.png",
+    //   "summary": "Full project summary used in the expanded project view.",
+    //   "cardSummary": "Short summary shown on the minimized project card.",
+    //   "challenges": "Main implementation challenges and tradeoffs.",
+    //   "tools": [
+    //     "Tool A",
+    //     "Tool B"
+    //   ],
+    //   "link": "https://example.com/project-link",
+    //   "id": 9
+    // },
+    // {
+    //   "type": "present",
+    //   "title": "MNIST DATASET (INTERACTIVE)",
+    //   "image": "https://example.com/project-image.png",
+    //   "summary": "Full project summary used in the expanded project view.",
+    //   "cardSummary": "Short summary shown on the minimized project card.",
+    //   "challenges": "Main implementation challenges and tradeoffs.",
+    //   "tools": [
+    //     "Tool A",
+    //     "Tool B"
+    //   ],
+    //   "link": "https://example.com/project-link",
+    //   "id": 10
+    // }
