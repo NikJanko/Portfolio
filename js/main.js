@@ -75,7 +75,7 @@ async function initializeMainPage() {
 
 async function loadPortfolioData() {
     try {
-        const response = await fetch('../data/content.json');
+        const response = await fetch('../data/content.json', { cache: 'no-store' });
         if (!response.ok) {
             throw new Error('Unable to load content.json');
         }
