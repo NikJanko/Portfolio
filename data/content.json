@@ -8,6 +8,21 @@
   "education": [
     {
       "id": 1,
+      "title": "Master of Science (MSc)",
+      "subject": "Intelligent Systems - Genetic Adversarial Networks",
+      "institution": "Brock University",
+      "duration": "2026 - Present",
+      "image": "../images/Brock_University_Logo.svg",
+      "focus": [
+        "Evolutionary Algorithms",
+        "Adversarial Networks",
+        "Neural Networks",
+        "Artificial Intelligence",
+        "Graph Technologies"
+      ]
+    },
+    {
+      "id": 2,
       "title": "Bachelor of Science Honours (BSc)",
       "subject": "Computer Science - Concentration in Intelligent Systems",
       "institution": "Brock University",
@@ -20,21 +35,6 @@
         "Machine Learning",
         "Evolutionary Algorithms",
         "Artificial Intelligence"
-      ]
-    },
-    {
-      "id": 2,
-      "title": "Master of Science (MSc)",
-      "subject": "Intelligent Systems - Genetic Adversarial Networks",
-      "institution": "Brock University",
-      "duration": "2026 - Present",
-      "image": "../images/Brock_University_Logo.svg",
-      "focus": [
-        "Evolutionary Algorithms",
-        "Adversarial Networks",
-        "Neural Networks",
-        "Artificial Intelligence",
-        "Graph Technologies"
       ]
     }
   ],
